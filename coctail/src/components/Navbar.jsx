@@ -7,6 +7,15 @@ const Navbar = function () {
             <div className="flex-1">
                 <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
             </div>
+
+            <div className="flex-none">
+                <ul className="menu menu-horizontal p-0">
+                <li><a>Cocktails</a></li>
+                <li><a>Meals</a></li>
+                <li><a>Blog</a></li>
+                </ul>
+            </div>
+
             <div className="flex-none gap-2">
                 <div className="form-control">
                 <input type="text" placeholder="Search" className="input input-bordered" />

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import {getData, getSingleCocktail} from './data/get.data.js'
 import './App.css'
-import Cocktail from './components/Coctail';
-import CocktailDetails from './components/CocktailDetails';
+import Cocktail from './components/recipes/Coctail';
+import CocktailDetails from './components/recipes/CocktailDetails';
 import Navbar from './components/Navbar'
 
 
