@@ -1,32 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
+import { useEffect, useState } from 'react'
+import {getData, getSingleCocktail} from './data/get.data.js'
 import './App.css'
+import Cocktail from './components/Coctail';
+import CocktailDetails from './components/CocktailDetails';
+import Navbar from './components/Navbar'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [cocktail, setCocktail] = useState([]);
+
+  useEffect(() => {
+    getData().then(result => setCocktail(result.drinks));
+  },[])
+
+  
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <Navbar />
+      
+      <div className="flex flex-wrap justify-around">
+        {cocktail.map(el => <Cocktail key={el.idDrink} cocktail={el} cockDetails={() => cockDetails(el.idDrink)}/>)}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <CocktailDetails cocktail={cocktail.length && cocktail[22]}/>
     </div>
   )
 }
