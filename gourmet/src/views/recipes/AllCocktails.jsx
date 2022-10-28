@@ -1,22 +1,26 @@
 import React from "react"
+import { useEffect, useState } from 'react'
+import {getData} from '../../data/get.data.js'
+import RecipesCard from "../../components/recipes/RecipesCard"
 
-const Cocktail = ({cocktail, cockDetails}) => {
-    
-    return (
-        
-        <div className="card w-96 bg-base-100 shadow-xl">
-        <figure className="px-10 pt-10">
-          <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="rounded-xl" />
-        </figure>
-        <div className="card-body items-center text-center">
-          <h2 className="card-title">{cocktail.strDrink}</h2>
-          <p>{cocktail.strCategory}</p>
-          <div className="card-actions">
-            <button className="btn btn-primary" onClick={() => cockDetails(cocktail.idDrink)}>Details</button>
-          </div>
-        </div>
+const AllCocktails = () => {
+  const [cocktail, setCocktail] = useState([]);
+
+  useEffect(() => {
+    getData().then(result => setCocktail(result.drinks));
+  }, [])
+
+
+
+  return (
+    <div className="AllCocktails">
+
+      <div className="flex flex-wrap justify-around">
+        {cocktail.map(el => <RecipesCard key={el.idDrink} cocktail={el} cockDetails={() => cockDetails(el.idDrink)} />)}
       </div>
-    )
+      {/* // <CocktailDetails cocktail={cocktail.length && cocktail[22]} /> */}
+    </div>
+  )
 }
 
-export default Cocktail
+export default AllCocktails

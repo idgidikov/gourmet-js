@@ -1,16 +1,19 @@
 import React from "react"
+import AllCocktails from "../views/recipes/AllCocktails"
+import {Routes, Route, Link} from "react-router-dom"
+import Home from "../views/Home"
 
 const Navbar = function () {
 
     return (
         <div className="navbar bg-base-100">
             <div className="flex-1">
-                <a className="btn btn-ghost normal-case text-xl">Gourmet</a>
+                <Link to="/"><p className="btn btn-ghost normal-case text-xl">Gourmet</p></Link>
             </div>
 
             <div className="flex-none">
                 <ul className="menu menu-horizontal p-0">
-                <li><a>Cocktails</a></li>
+                <li><Link to="/cocktails">Cocktails</Link></li>
                 <li><a>Meals</a></li>
                 <li><a>Blog</a></li>
                 </ul>

@@ -1,28 +1,21 @@
 import { useEffect, useState } from 'react'
-import {getData, getSingleCocktail} from './data/get.data.js'
 import './App.css'
-import Cocktail from './components/recipes/Coctail';
-import CocktailDetails from './components/recipes/CocktailDetails';
 import Navbar from './components/Navbar'
-
+import Home from './views/Home'
+import AllCocktails from "./views/recipes/AllCocktails"
+import {Routes, Route} from "react-router-dom"
 
 function App() {
-  const [cocktail, setCocktail] = useState([]);
 
-  useEffect(() => {
-    getData().then(result => setCocktail(result.drinks));
-  },[])
-
-  
 
   return (
     <div className="App">
       <Navbar />
-      
-      <div className="flex flex-wrap justify-around">
-        {cocktail.map(el => <Cocktail key={el.idDrink} cocktail={el} cockDetails={() => cockDetails(el.idDrink)}/>)}
-      </div>
-      <CocktailDetails cocktail={cocktail.length && cocktail[22]}/>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/cocktails" element={<AllCocktails />} />
+      </Routes>
+     
     </div>
   )
 }

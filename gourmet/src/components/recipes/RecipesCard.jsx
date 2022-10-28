@@ -1,6 +1,6 @@
 import React from "react"
 
-const Cocktail = ({cocktail, cockDetails}) => {
+const RecipesCard = ({cocktail, cockDetails}) => {
     
     return (
         
@@ -19,4 +19,4 @@ const Cocktail = ({cocktail, cockDetails}) => {
     )
 }
 
-export default Cocktail
+export default RecipesCard
