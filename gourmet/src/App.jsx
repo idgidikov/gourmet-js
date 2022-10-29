@@ -4,6 +4,8 @@ import Navbar from './components/Navbar'
 import Home from './views/Home'
 import AllCocktails from "./views/recipes/AllCocktails"
 import {Routes, Route} from "react-router-dom"
+import AllPosts from "./views/forum/AllPost"
+import CreatePost from './views/forum/CreatePost'
 
 function App() {
 
@@ -14,6 +16,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/cocktails" element={<AllCocktails />} />
+        <Route path="/blog-posts/" element={<AllPosts />} />
+        <Route path="/create-blog-posts/" element={<CreatePost />} />
       </Routes>
      
     </div>
