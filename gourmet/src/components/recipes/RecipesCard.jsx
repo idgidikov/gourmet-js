@@ -1,5 +1,6 @@
 import React from "react"
-
+import {Link} from 'react-router-dom'
+import { useParams } from "react-router-dom"
 const RecipesCard = ({cocktail, cockDetails}) => {
     
     return (
@@ -12,7 +13,12 @@ const RecipesCard = ({cocktail, cockDetails}) => {
           <h2 className="card-title">{cocktail.strDrink}</h2>
           <p>{cocktail.strCategory}</p>
           <div className="card-actions">
-            <button className="btn btn-primary" onClick={() => cockDetails(cocktail.idDrink)}>Details</button>
+            
+            <Link className="btn btn-primary" to={`/cocktails/${cocktail.idDrink}`}>
+            Details
+            </Link>
+             
+            
           </div>
         </div>
       </div>

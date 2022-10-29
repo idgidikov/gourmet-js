@@ -1,12 +1,15 @@
 import React from "react"
 import {useState, useEffect} from "react"
+import { useParams } from "react-router-dom"
+import { getSingleCocktail } from "../../data/get.data"
 
-
-const CocktailDetails = ({cocktail}) => {
-    const [cock, setCock] = useState(cocktail)
+const CocktailDetails = () => {
+    const {id} = useParams();
+    const [cock, setCock] = useState({})
     useEffect(() => {
-        setCock(cocktail)
-    },[cocktail])
+        
+        getSingleCocktail(id).then(result => setCock(result?.drinks[0]));
+    },[id])
     const ingredients = Object.keys(cock).filter(key => key.includes("strIngredient"))
     const measure = Object.keys(cock).filter(key => key.includes("strMeasure"))
 

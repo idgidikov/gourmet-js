@@ -16,7 +16,7 @@ const AllCocktails = () => {
     <div className="AllCocktails">
 
       <div className="flex flex-wrap justify-around">
-        {cocktail.map(el => <RecipesCard key={el.idDrink} cocktail={el} cockDetails={() => cockDetails(el.idDrink)} />)}
+        {cocktail.map(el => <RecipesCard key={el.idDrink} cocktail={el} cockDetails={() => (el.idDrink)} />)}
       </div>
       {/* // <CocktailDetails cocktail={cocktail.length && cocktail[22]} /> */}
     </div>
