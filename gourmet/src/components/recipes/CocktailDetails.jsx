@@ -21,12 +21,12 @@ const CocktailDetails = () => {
         <figure><img className="cocktail-detail-image" src={cock.strDrinkThumb} alt={cock.strDrink}/></figure>
         <div className="card-body">
             <h2 className="card-title">{cock.strDrink}</h2>
-            <p><b>Category:</b> {cock.strCategory}</p>
-            <p><b>Glass:</b> {cock.strGlass}</p>
-            <p>Ingredients</p>
-            {ingredients.filter(el => cock[el]).map(el => <p className="card-info mt-2" key={el.slice(-1)}>{cock[el]}: {cock[pear(el)]} </p>)}
+            <p><b className="badge badge-accent">Category:</b> {cock.strCategory}</p>
+            <p><b className="badge badge-accent">Glass:</b> {cock.strGlass}</p>
+            <p className="badge badge-accent">Ingredients</p>
+            {ingredients.filter(el => cock[el]).map(el => <p key={el.slice(-1)}><span className="badge badge-accent">{cock[el]}:</span> {cock[pear(el)]} </p>)}
             <div className="card-actions justify-end">
-            <p><b>Instructions: </b> {cock.strInstructions}</p>
+            <p><b className="badge badge-accent">Instructions: </b> {cock.strInstructions}</p>
             </div>
         </div>
         </div>
