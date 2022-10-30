@@ -18,15 +18,15 @@ const CocktailDetails = () => {
     }
     return (
         <div className="card lg:card-side bg-base-100 shadow-xl">
-        <figure><img src={cock.strDrinkThumb} alt={cock.strDrink}/></figure>
+        <figure><img className="cocktail-detail-image" src={cock.strDrinkThumb} alt={cock.strDrink}/></figure>
         <div className="card-body">
             <h2 className="card-title">{cock.strDrink}</h2>
+            <p><b>Category:</b> {cock.strCategory}</p>
+            <p><b>Glass:</b> {cock.strGlass}</p>
             <p>Ingredients</p>
-            <ul>
-                {ingredients.filter(el => cock[el]).map(el => <li key={el.slice(-1)}>{cock[el]}: {cock[pear(el)]} </li>)}
-            </ul>
+            {ingredients.filter(el => cock[el]).map(el => <p className="card-info mt-2" key={el.slice(-1)}>{cock[el]}: {cock[pear(el)]} </p>)}
             <div className="card-actions justify-end">
-            <button className="btn btn-primary">Listen</button>
+            <p><b>Instructions: </b> {cock.strInstructions}</p>
             </div>
         </div>
         </div>

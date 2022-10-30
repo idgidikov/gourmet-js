@@ -15,12 +15,10 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/cocktails" element={<AllCocktails />} />
+        <Route path="/cocktails/" element={<AllCocktails />} />
         <Route path="/cocktails/:id" element={ <CocktailDetails />} />
         <Route path="/blog-posts/" element={<AllPosts />} />
-        <Route path="/create-blog-posts/" element={<CreatePost />} 
-        
-        />
+        <Route path="/create-blog-posts/" element={<CreatePost />} />
       </Routes>
      
     </div>
