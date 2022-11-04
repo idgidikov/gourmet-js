@@ -5,7 +5,6 @@ import { getSingleCocktail } from "../../data/get.data"
 import { API_KEYS } from "../../common/constants"
 const MealDetails = () => {
     const {id} = useParams();
-    console.log(id)
     const [meal, setMeal] = useState({})
     useEffect(() => {
         

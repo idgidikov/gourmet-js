@@ -7,6 +7,8 @@ import {Routes, Route} from "react-router-dom"
 import AllPosts from "./views/forum/AllPost"
 import CreatePost from './views/forum/CreatePost'
 import CocktailDetails from "./components/recipes/CocktailDetails"
+import MealDetails from "./components/recipes/MealDetails"
+import AllMeals from "./views/recipes/AllMeals"
 function App() {
 
 
@@ -17,6 +19,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/cocktails/" element={<AllCocktails />} />
         <Route path="/cocktails/:id" element={ <CocktailDetails />} />
+        <Route path="/meals/" element={<AllMeals />} />
+        <Route path="/meals/:id" element={ <MealDetails />} />
         <Route path="/blog-posts/" element={<AllPosts />} />
         <Route path="/create-blog-posts/" element={<CreatePost />} />
       </Routes>

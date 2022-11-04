@@ -2,12 +2,13 @@ import React from "react"
 import { useEffect, useState } from 'react'
 import {getData} from '../../data/get.data.js'
 import RecipesCard from "../../components/recipes/RecipesCard"
+import { API_KEYS } from "../../common/constants.js"
 
 const AllCocktails = () => {
   const [cocktail, setCocktail] = useState([]);
 
   useEffect(() => {
-    getData().then(result => setCocktail(result.drinks));
+    getData(API_KEYS.cocktail).then(result => setCocktail(result.drinks));
   }, [])
 
 
