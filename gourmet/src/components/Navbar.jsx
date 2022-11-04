@@ -14,7 +14,7 @@ const Navbar = function () {
             <div className="flex-none">
                 <ul className="menu menu-horizontal p-0">
                 <li><NavLink to="/cocktails">Cocktails</NavLink></li>
-                <li><a>Meals</a></li>
+                <li><NavLink to="/meals" >Meal</NavLink></li>
                 <li><NavLink to="/blog-posts/">Blog</NavLink></li>
                 </ul>
             </div>
