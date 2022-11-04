@@ -4,7 +4,8 @@ export const getData = async function (API) {
 }
 
 export const getSingleCocktail = async function (API,id) {
-    const data = await fetch(`${API}${id}`);
+    const data = await fetch(`${API+id}`);
+    
     return data.json();
 
 }

@@ -9,7 +9,7 @@ const CocktailDetails = () => {
     const [cock, setCock] = useState({})
     useEffect(() => {
         
-        getSingleCocktail(API_KEYS.cocktailId).then(result => setCock(result?.drinks[0]));
+        getSingleCocktail(API_KEYS.cocktailId,id).then(result => setCock(result?.drinks[0]));
     },[id])
     const ingredients = Object.keys(cock).filter(key => key.includes("strIngredient"))
     const measure = Object.keys(cock).filter(key => key.includes("strMeasure"))

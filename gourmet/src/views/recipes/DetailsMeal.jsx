@@ -12,7 +12,7 @@ const MealDetails = () => {
         getSingleCocktail(API_KEYS.mealId,id).then(result => setMeal(result?.meals[0]));
     },[id])
     const ingredients = Object.keys(meal).filter(key => key.includes("strIngredient"))
-    const measure = Object.keys().filter(key => key.includes("strMeasure"))
+    const measure = Object.keys(meal).filter(key => key.includes("strMeasure"))
 
     const pear = (el) => {
         return measure.find(element => element.slice(-1) === el.slice(-1))
@@ -23,7 +23,7 @@ const MealDetails = () => {
         <div className="card-body">
             <h2 className="card-title">{meal.strMeal}</h2>
             <p><b className="badge badge-accent">Category:</b> {meal.strCategory}</p>
-            <p><b className="badge badge-accent">Glass:</b> {meal.strGlass}</p>
+            {/* <p><b className="badge badge-accent">Glass:</b> {meal.strGlass}</p> */}
             <p className="badge badge-accent">Ingredients</p>
             {ingredients.filter(el => meal[el]).map(el => <p key={el.slice(-1)}><span className="badge badge-accent">{meal[el]}:</span> {meal[pear(el)]} </p>)}
             <div className="card-actions justify-end">

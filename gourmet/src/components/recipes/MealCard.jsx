@@ -14,7 +14,7 @@ const MealCard = ({meal}) => {
           <p>{meal.strCategory}</p>
           <div className="card-actions">
             
-            <Link className="btn btn-primary" to={`/cocktails/${meal.idMeal}`}>
+            <Link className="btn btn-primary" to={`/meals/${meal.idMeal}`}>
             Details
             </Link>
              
