@@ -8,3 +8,15 @@
   width: 300px;
   height: 300px;
 }
+
+.quill {
+  color: #f0f0f0;
+  height: 550px;
+}
+
+.quill span {
+  color: #f0f0f0;
+}
+.quill svg {
+  background-color: #f0f0f0;
+}

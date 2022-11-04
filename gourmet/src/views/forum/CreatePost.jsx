@@ -21,6 +21,11 @@ const CreatePost = () => {
         'list', 'bullet', 'indent',
         'link', 'image', 'video'
       ]
+
+    const obj = () => {
+      console.log(value)
+    }
+
     return (
         <div className="create-post">
             <ReactQuill 
@@ -30,7 +35,7 @@ const CreatePost = () => {
             value={value} 
             onChange={setValue} 
             />
-            <a className="btn btn-primary mt-5">Publish</a>
+            <a className="btn btn-primary mt-14" onClick={obj}>Publish</a>
         </div>
     )
 }
