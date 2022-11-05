@@ -10,6 +10,7 @@ import CocktailDetails from "./components/recipes/CocktailDetails"
 import MealDetails from "./components/recipes/MealDetails"
 import AllMeals from "./views/recipes/AllMeals"
 import Login from './views/users/Login'
+import Signup from './views/users/Signup'
 function App() {
 
 
@@ -19,6 +20,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path= '/login' element={<Login />} />
+        <Route path= '/signup' element={<Signup />} />
         <Route path="/cocktails" element={<AllCocktails />} />
         <Route path="/cocktails/:id" element={ <CocktailDetails />} />
         <Route path="/meals" element={<AllMeals />} />
