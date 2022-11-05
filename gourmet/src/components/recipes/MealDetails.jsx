@@ -18,7 +18,7 @@ const MealDetails = () => {
     }
     return (
         <div className="card lg:card-side bg-base-100 shadow-xl">
-        <figure><img className="mealtail-detail-image" src={meal.strMealThumb} alt={meal.strMeal}/></figure>
+        <figure><img className="meal-detail-image" src={meal.strMealThumb} alt={meal.strMeal}/></figure>
         <div className="card-body">
             <h2 className="card-title">{meal.strMeal}</h2>
             <p><b className="badge badge-accent">Category:</b> {meal.strCategory}</p>
