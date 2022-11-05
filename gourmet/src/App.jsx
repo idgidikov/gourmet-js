@@ -9,6 +9,7 @@ import CreatePost from './views/forum/CreatePost'
 import CocktailDetails from "./components/recipes/CocktailDetails"
 import MealDetails from "./components/recipes/MealDetails"
 import AllMeals from "./views/recipes/AllMeals"
+import Login from './views/users/Login'
 function App() {
 
 
@@ -17,6 +18,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path= '/login' element={<Login />} />
         <Route path="/cocktails" element={<AllCocktails />} />
         <Route path="/cocktails/:id" element={ <CocktailDetails />} />
         <Route path="/meals" element={<AllMeals />} />
