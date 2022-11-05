@@ -5,6 +5,7 @@ import Home from './views/Home'
 import AllCocktails from "./views/recipes/AllCocktails"
 import {Routes, Route} from "react-router-dom"
 import { AppContext } from './context/app.context'
+import NotFound from './views/NotFound'
 import AllPosts from "./views/forum/AllPost"
 import CreatePost from './views/forum/CreatePost'
 import CocktailDetails from "./components/recipes/CocktailDetails"
@@ -13,6 +14,7 @@ import AllMeals from "./views/recipes/AllMeals"
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './firebase/config'
 import { getUserById } from './services/users.services'
+import Login from './views/users/Login'
 
 function App() {
   const [user, loading, error] = useAuthState(auth)
@@ -65,15 +67,24 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path= '/login' element={<Login />} />
           <Route path="/cocktails" element={<AllCocktails />} />
           <Route path="/cocktails/:id" element={ <CocktailDetails />} />
           <Route path="/meals" element={<AllMeals />} />
           <Route path="/meals/:id" element={ <MealDetails />} />
           <Route path="/blog-posts/" element={<AllPosts />} />
           <Route path="/create-blog-posts/" element={<CreatePost />} />
+          <Route path="/*" element={<NotFound />} />
         </Routes>
+        <div className="toast">
+          {toasts.map((t, i) => <div key={i} className={`alert ${t.class}`}>
+            <div>
+              <span>{t.message}</span>
+            </div>
+          </div>)}
+        </div>
       </div>
-    </AppContext.Provider>
+    </AppContext.Provider>     
   )
 }
 
