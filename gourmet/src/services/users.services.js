@@ -9,20 +9,20 @@ export const getUser = async (username) => {
   return snapshot.val()
 }
 
-export const getUserById = async (uid) => {
-  const snapshot = await get(query(ref(db, 'users'), orderByChild('uid'), equalTo(uid)))
+// export const getUserById = async (uid) => {
+//   const snapshot = await get(query(ref(db, 'users'), orderByChild('uid'), equalTo(uid)))
 
-  //const { comments, movies, likedMovies, ...value } = snapshot.val()?.[Object.keys(snapshot.val())?.[0]] 
+//   //const { comments, movies, likedMovies, ...value } = snapshot.val()?.[Object.keys(snapshot.val())?.[0]] 
 
 
 
-  return {
-    ...value,
-    //commentIds: comments ? Object.keys(comments) : [],
-    //movieIds: movies ? Object.keys(movies) : [],
-    //likedMoviesIds: likedMovies ? Object.keys(likedMovies) : [],
-  }
-}
+//   return {
+//     ...value,
+//     //commentIds: comments ? Object.keys(comments) : [],
+//     //movieIds: movies ? Object.keys(movies) : [],
+//     //likedMoviesIds: likedMovies ? Object.keys(likedMovies) : [],
+//   }
+// }
 
 export const createUser = async (uid, username, role = userRole.BASIC) => {
   const user = await getUser(username)

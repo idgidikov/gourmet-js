@@ -13,8 +13,11 @@ import MealDetails from "./components/recipes/MealDetails"
 import AllMeals from "./views/recipes/AllMeals"
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './firebase/config'
-import { getUserById } from './services/users.services'
+// import { getUserById } from './services/users.services'
 import Login from './views/users/Login'
+import Signup from './views/users/Signup'
+
+
 
 function App() {
   const [user, loading, error] = useAuthState(auth)
@@ -67,7 +70,8 @@ function App() {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path= '/login' element={<Login />} />
+          <Route path= "/login" element={<Login />} />
+          <Route path= "/sign-up" element={<Signup />} />
           <Route path="/cocktails" element={<AllCocktails />} />
           <Route path="/cocktails/:id" element={ <CocktailDetails />} />
           <Route path="/meals" element={<AllMeals />} />
