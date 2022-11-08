@@ -1,8 +1,14 @@
 import React from 'react'
-import { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useContext, useState } from 'react'
+import { AppContext } from '../../context/app.context'
+
 
 function Login() {
-
+    const [formRole, setFormRole] = useState('login')
+    const { addToast, setAppState, ...appState } = useContext(AppContext)
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const [form, setForm] = useState({
         username: {

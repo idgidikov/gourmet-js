@@ -3,10 +3,16 @@ import { useState } from 'react'
 import { AppContext } from '../../context/app.context'
 import UserValid from '../../common/enums/user-validation'
 import { useContext } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import {createUser, getUser} from '../../services/users.services'
+import{registerUser,loginUser} from '../../services/auth.services'
+
 
 function Signup() {
+    //const [formRole, setFormRole] = useState('login')
     const { addToast, setAppState, ...appState } = useContext(AppContext)
-
+    const navigate = useNavigate()
+    const location = useLocation()
 
     const [form, setForm] = useState({
         username: {
@@ -55,7 +61,7 @@ function Signup() {
                 value,
                 touched: true,
                 valid: value.length >= UserValid.USER_MIN && value.length <= UserValid.USER_MAX,
-                error: value.length < UserValid.USER_MIN ? `Minimum username lenght: ${UserValid.USER_MIN}` : `Maximum username lenght: ${UserValid.USER_MAX}`,
+                error: value.length < UserValid.USER_MIN ? `Minimum username length: ${UserValid.USER_MIN}` : `Maximum username length: ${UserValid.USER_MAX}`,
             },
         })
     }
@@ -68,7 +74,7 @@ function Signup() {
                 value,
                 touched: true,
                 valid: value.length >= 4 && value.length <= 32,
-                error: value.length < 4 ? 'Minimum email lenght: 4' : 'Maximum email lenght: 32'
+                error: value.length < 4 ? 'Minimum email length: 4' : 'Maximum email length: 32'
             },
         })
     }
@@ -123,6 +129,63 @@ function Signup() {
         })
     }
 
+    const register = async (e) => {
+        e.preventDefault()
+
+    if (!form.username.valid) return addToast('error', 'Invalid email')
+    if (!form.email.valid) return addToast('error', 'Invalid email')
+    if (!form.password.valid) return addToast('error', 'Invalid password')
+    if (!form.confirmPassword.valid) return addToast('error', 'Password does not match')
+    if (!form.name.valid) return addToast('error', 'Invalid name')
+    if (!form.last.valid) return addToast('error', 'Invalid last name')
+    try {
+        const user = await getUser(form.username.value)
+
+        if (user !== null) return addToast('error', `User with username ${form.username.value} already exists!`)
+
+        const credentials = await registerUser(form.email.value, form.password.value)
+
+        try {
+          const userData = await createUser(credentials.user.uid, form.username.value)
+
+          setAppState({
+            ...appState,
+            userData,
+          })
+        } catch (e) {
+          return addToast('error', e.message)
+        }
+
+        try {
+          const credentials = await loginUser(form.email.value, form.password.value)
+
+          setAppState({
+            ...appState,
+            user: {
+              email: credentials.user.email,
+              uid: credentials.user.uid,
+            }
+          })
+
+          addToast('success', 'You have been logged!')
+
+          navigate('/')
+        } catch (error) {
+          addToast('error', 'Something went wrong')
+          console.log(error)
+        }
+      } catch (error) {
+        if (error.message.includes('auth/email-already-in-use')) {
+          return addToast('error', 'This email has already been registered!')
+        }
+
+        addToast('error', 'Something went wrong')
+      }
+    
+
+    
+}
+
 
     return (
         <div className=''>
@@ -141,7 +204,7 @@ function Signup() {
                                             />
                                             <h4 className="text-xl font-semibold mt-1 mb-12 pb-1">We are The Gourmet Team</h4>
                                         </div>
-                                        <form>
+                                        <form >
                                             <p className="mb-4">Please login to your account</p>
                                             <div className="mb-4">
                                                 <input
@@ -206,23 +269,24 @@ function Signup() {
                                             <div className="text-center pt-1 mb-12 pb-1">
                                                 <button
                                                     className="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
-                                                    type="button"
+                                                    type="submit"
+                                                    onClick={register}
                                                     data-mdb-ripple="true"
                                                     data-mdb-ripple-color="light"
                                                 >
-                                                    Log in
+                                                    Register
                                                 </button>
                                                 <a className="text-gray-500" href="#!">Forgot password?</a>
                                             </div>
                                             <div className="flex items-center justify-between pb-6">
-                                                <p className="mb-0 mr-2">Don't have an account?</p>
+                                                <p className="mb-0 mr-2">You have an account?</p>
                                                 <button
                                                     type="button"
                                                     className="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
                                                     data-mdb-ripple="true"
                                                     data-mdb-ripple-color="light"
                                                 >
-                                                    Register
+                                                    Log In
                                                 </button>
                                             </div>
                                         </form>
@@ -231,15 +295,7 @@ function Signup() {
                                 <div
                                     className="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
                                 >
-                                    <div className="text-white px-4 py-6 md:p-12 md:mx-6">
-                                        <h4 className="text-xl font-semibold mb-6">We are more than just a company</h4>
-                                        <p className="text-sm">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                            consequat.
-                                        </p>
-                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>
