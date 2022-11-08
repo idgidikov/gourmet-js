@@ -8,14 +8,14 @@ import { getStorage } from 'firebase/storage'
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDsu2lhYQ2dBPyPE6SSqodR3BdFwc1tiYo",
-  authDomain: "gourmet-7c0a4.firebaseapp.com",
-  projectId: "gourmet-7c0a4",
-  storageBucket: "gourmet-7c0a4.appspot.com",
-  messagingSenderId: "1042249482251",
-  appId: "1:1042249482251:web:4efb5ea99e7c9e26b1870e",
-  //Added
-  databaseURL: "https://gourmet-7c0a4-default-rtdb.europe-west1.firebasedatabase.app/",
+  apiKey: "AIzaSyD96vjt2W4_zoypgoT3gaEbDb8dv6DA6CY",
+  authDomain: "gourmet-d8238.firebaseapp.com",
+  projectId: "gourmet-d8238",
+  storageBucket: "gourmet-d8238.appspot.com",
+  messagingSenderId: "792116827858",
+  appId: "1:792116827858:web:16793b0665c10ceebb3f0b",
+
+  databaseURL: "https://gourmet-d8238-default-rtdb.europe-west1.firebasedatabase.app/",
 };
 
 // Initialize Firebase

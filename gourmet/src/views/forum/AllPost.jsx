@@ -1,14 +1,28 @@
 import React from "react"
 import MenuBlog from "../../components/forum/MenuBlog"
-import CreatePost from "./CreatePost"
+import { getAllPosts } from '../../services/post.services'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { useContext } from 'react'
+import { AppContext } from '../../context/app.context'
+import PostsCard from '../../components/forum/PostCard'
 
 const AllPosts = () => {
+    const [posts, setPosts] = useState([])
+    const { addToast } = useContext(AppContext)
 
-
+    useEffect(() => {
+        getAllPosts().then(setPosts).catch(e => addToast('error', e.message))
+    }, [])
+    console.log(posts[0])
     return (
         <div className="AllPost">
             <MenuBlog />
             <h1>All Posts</h1>
+           
+            <div className="flex flex-wrap justify-around">
+                {posts.map(p => <PostsCard key={p.id} post={p} />)}
+            </div>
             
         </div>
         )
