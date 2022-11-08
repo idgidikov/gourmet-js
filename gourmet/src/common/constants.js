@@ -5,3 +5,5 @@ export const API_KEYS= {
     mealId : 'https://www.themealdb.com/api/json/v1/1/lookup.php?i='
 
 }
+
+export const API = `http://localhost:5173`
