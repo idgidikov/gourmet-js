@@ -60,8 +60,8 @@ function Signup() {
             username: {
                 value,
                 touched: true,
-                valid: value.length >= UserValid.USER_MIN && value.length <= UserValid.USER_MAX,
-                error: value.length < UserValid.USER_MIN ? `Minimum username length: ${UserValid.USER_MIN}` : `Maximum username length: ${UserValid.USER_MAX}`,
+                valid: value.length >= UserValid.USER_MIN_LENGTH && value.length <= UserValid.USER_MAX_LENGTH,
+                error: value.length < UserValid.USER_MIN_LENGTH ? `Minimum username length: ${UserValid.USER_MIN_LENGTH}` : `Maximum username length: ${UserValid.USER_MAX_LENGTH}`,
             },
         })
     }
@@ -146,7 +146,7 @@ function Signup() {
         const credentials = await registerUser(form.email.value, form.password.value)
 
         try {
-          const userData = await createUser(credentials.user.uid, form.username.value)
+          const userData = await createUser(credentials.user.uid, form.username.value,form.email.value,form.name.value,form.last.value)
 
           setAppState({
             ...appState,

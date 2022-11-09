@@ -13,9 +13,10 @@ import MealDetails from "./components/recipes/MealDetails"
 import AllMeals from "./views/recipes/AllMeals"
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './firebase/config'
-//  import { getUserById } from './services/users.services'
+  import { getUserById } from './services/users.services'
 import Login from './views/users/Login'
 import Signup from './views/users/Signup'
+import Logout from './views/users/Logout'
 
 
 
@@ -38,14 +39,14 @@ function App() {
     })
   }, [user])
 
-  // useEffect(() => {
-  //   if (appState.user !== null) {
-  //     console.log('fetching user from App.jsx')
-  //     getUserById(appState.user.uid)
-  //       .then(userData => setAppState({...appState, userData }) || console.log(userData))
-  //       .catch(e => addToast('error', e.message))
-  //   }
-  // }, [appState.user])
+  useEffect(() => {
+    if (appState.user !== null) {
+      console.log('fetching user from App.jsx')
+      getUserById(appState.user.uid)
+        .then(userData => setAppState({...appState, userData }) || console.log(userData))
+        .catch(e => addToast('error', e.message))
+    }
+  }, [appState.user])
 
   /**
    * 
@@ -78,6 +79,7 @@ function App() {
           <Route path="/meals/:id" element={ <MealDetails />} />
           <Route path="/blog-posts/" element={<AllPosts />} />
           <Route path="/create-blog-posts/" element={<CreatePost />} />
+          <Route path="/logout" element={<Logout/>} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <div className="toast">
