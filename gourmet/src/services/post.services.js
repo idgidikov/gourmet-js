@@ -2,17 +2,19 @@ import { ref, push, get, set, update, query, equalTo, orderByChild, orderByKey }
 import { db } from '../firebase/config'
 import { API } from '../common/constants'
 
-export const createPost = async(data) => {
-  const post = {
-    data,
+export const createPost = async({title, post}) => {
+  const body = {
+    title,
+    post,
     addedOn: Date.now(),
   }
 
-  const { key } = await set(ref(db, `posts/`), post)
+  const result = await push(ref(db, `posts`), body)
+  return result
 
-  return update(ref(db), {
-    [`posts/${key}`] : true,
-  })
+  // return update(ref(db), {
+  //   [`posts/${key}`] : true,
+  // })
 }
 
 export const getAllPosts = async () => {
@@ -33,13 +35,15 @@ export const getAllPosts = async () => {
   // return response.json()
 }
 
-// export const getMovieById = async (id) => {
-//   const response = await fetch(`${API}/movies/${id}`)
+export const getPostById = async (id) => {
+  const snapshot = await get(ref(db, `posts/${id}`))
 
-//   if (!response.ok) throw new Error('Something went wrong!')
-
-//   return response.json()
-// }
+  if (!snapshot.exists()) throw new Error('Post doesn\'t exist!')
+  return {
+    ...snapshot.val(),
+    id,
+  }
+}
 
 // export const getMoviesByName = async (name) => {
 //   const response = await fetch(`${API}/movies?name=${name}`)

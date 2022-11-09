@@ -13,9 +13,10 @@ import MealDetails from "./components/recipes/MealDetails"
 import AllMeals from "./views/recipes/AllMeals"
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './firebase/config'
-  import { getUserById } from './services/users.services'
+import { getUserById } from './services/users.services'
 import Login from './views/users/Login'
 import Signup from './views/users/Signup'
+import DetailsPost from './views/forum/DetailsPost'
 import Logout from './views/users/Logout'
 import Profile from './views/users/Profile'
 
@@ -80,6 +81,7 @@ function App() {
           <Route path="/meals/:id" element={ <MealDetails />} />
           <Route path="/blog-posts/" element={<AllPosts />} />
           <Route path="/create-blog-posts/" element={<CreatePost />} />
+          <Route path="/blog-post/:postId" element={<DetailsPost />} />
           <Route path="/logout" element={<Logout/>} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/*" element={<NotFound />} />
