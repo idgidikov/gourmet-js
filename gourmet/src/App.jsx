@@ -17,6 +17,7 @@ import { auth } from './firebase/config'
 import Login from './views/users/Login'
 import Signup from './views/users/Signup'
 import Logout from './views/users/Logout'
+import Profile from './views/users/Profile'
 
 
 
@@ -80,6 +81,7 @@ function App() {
           <Route path="/blog-posts/" element={<AllPosts />} />
           <Route path="/create-blog-posts/" element={<CreatePost />} />
           <Route path="/logout" element={<Logout/>} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <div className="toast">
