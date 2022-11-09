@@ -13,6 +13,7 @@ function DetailsPost() {
     const [state, setState] = useState({
         post: '',
         title: '',
+        url: '',
     })
     useEffect(() => {
         getPostById(postId)
@@ -21,16 +22,18 @@ function DetailsPost() {
                     ...state,
                     post: p.post,
                     title: p.title,
+                    url: p.url,
 
                 }))
             })
             .catch(e => addToast('error', e.message))
     }, [postId]);
+
     return (
         <div className="container">
             <h1 className="text-2xl text-center font-bold pt-8 mb-20" dangerouslySetInnerHTML={{__html:state.title}}></h1>
             <div className="card lg:card-side bg-base-100 shadow-xl">
-            <figure><img src="https://placeimg.com/400/400/arch" alt="Album"/></figure>
+            <figure><img src={state.url} alt="Album"/></figure>
             <div className="card-body">
             <p dangerouslySetInnerHTML={{__html:state.post}}></p>
             <div className="card-actions justify-end">

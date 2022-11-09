@@ -1,16 +1,20 @@
 import { ref, push, get, set, update, query, equalTo, orderByChild, orderByKey } from 'firebase/database'
-import { db } from '../firebase/config'
+import { db, storage } from '../firebase/config'
+import { uploadBytesResumable } from 'firebase/storage'
+
 import { API } from '../common/constants'
 
-export const createPost = async({title, post}) => {
+export const createPost = async({title, post, url}) => {
   const body = {
     title,
     post,
+    url,
     addedOn: Date.now(),
   }
 
   const result = await push(ref(db, `posts`), body)
-  return result
+  
+  return result 
 
   // return update(ref(db), {
   //   [`posts/${key}`] : true,
@@ -66,3 +70,9 @@ export const getPostById = async (id) => {
 
 //   return response.json()
 // }
+
+export const uploadPostThumbnail = async () => {
+  const storageRef = ref(storage, `files/${file.name}`)
+  const uploadTask = uploadBytesResumable(storageRef, file);
+  console.log(uploadTask)
+}
