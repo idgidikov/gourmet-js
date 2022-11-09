@@ -16,6 +16,7 @@ import { auth } from './firebase/config'
 //  import { getUserById } from './services/users.services'
 import Login from './views/users/Login'
 import Signup from './views/users/Signup'
+import DetailsPost from './views/forum/DetailsPost'
 
 
 
@@ -78,6 +79,7 @@ function App() {
           <Route path="/meals/:id" element={ <MealDetails />} />
           <Route path="/blog-posts/" element={<AllPosts />} />
           <Route path="/create-blog-posts/" element={<CreatePost />} />
+          <Route path="/blog-post/:postId" element={<DetailsPost />} />
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <div className="toast">

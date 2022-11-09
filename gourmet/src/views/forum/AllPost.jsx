@@ -12,9 +12,11 @@ const AllPosts = () => {
     const { addToast } = useContext(AppContext)
 
     useEffect(() => {
-        getAllPosts().then(setPosts).catch(e => addToast('error', e.message))
+        getAllPosts().then((res) => {
+            setPosts(res)
+        }).catch(e => addToast('error', e.message))
     }, [])
-    console.log(posts[0])
+
     return (
         <div className="AllPost">
             <MenuBlog />
