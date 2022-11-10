@@ -5,10 +5,31 @@ import { useParams } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from '../../context/app.context'
 import { getPostById } from '../../services/post.services'
+import { useNavigate } from 'react-router-dom'
+import { deletePost } from '../../services/post.services'
 
 function DetailsPost() {
     const { postId } = useParams()
-    const { addToast, setAppState, userData } = useContext(AppContext)
+    const { addToast, userData } = useContext(AppContext)
+    const navigate = useNavigate()
+
+    const showPostDetails = () => {
+        navigate(`/blog-post/edit/${postId}`)
+    }
+
+    const successDelete = () => {
+        navigate(`/blog-post/removed`)
+    }
+
+    const removePost = async () => {
+        try {
+            await deletePost(postId, userData.username)
+            successDelete()
+        } catch (error) {
+            error => addToast('error', error.message)
+        }
+
+    }
 
     const [state, setState] = useState({
         post: '',
@@ -44,6 +65,9 @@ function DetailsPost() {
             <p dangerouslySetInnerHTML={{__html:state.post}}></p>
             <div className="card-actions justify-end">
                 <button className="btn btn-primary">Comment</button>
+                <button className="btn btn-primary" onClick={removePost}>Delete</button>
+                <button className="btn btn-primary" onClick={showPostDetails}>Edit</button>
+                
             </div>
             </div>
         </div>

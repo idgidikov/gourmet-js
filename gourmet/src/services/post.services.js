@@ -1,35 +1,36 @@
-import { ref, push, get, set, update, query, equalTo, orderByChild, orderByKey } from 'firebase/database'
+import { ref, push, get, set, update, remove, query, equalTo, orderByChild, orderByKey } from 'firebase/database'
 import { db, storage } from '../firebase/config'
+import { doc, deleteDoc } from "firebase/firestore";
 import { uploadBytesResumable } from 'firebase/storage'
 
 import { API } from '../common/constants'
 
 export const createPost = async({title, post, url, username}) => {
-  const body = {
-    title,
-    post,
-    url,
-    author: username,
-    addedOn: Date.now(),
-  }
+    const body = {
+      title,
+      post,
+      url,
+      author: username,
+      addedOn: Date.now(),
+    }
 
-  const { key } = await push(ref(db, `posts`), body)
-  
-  return update(ref(db), {
-    [`users/${username}/posts/${key}`] : true,
-  })
+    const { key } = await push(ref(db, `posts`), body)
+    
+    return update(ref(db), {
+      [`users/${username}/posts/${key}`] : true,
+    })
 }
 
 export const getAllPosts = async () => {
-  const snapshot = await get(ref(db, 'posts'))
+    const snapshot = await get(ref(db, 'posts'))
 
-  if (!snapshot.exists()) {
-    return []
-  }
+    if (!snapshot.exists()) {
+      return []
+    }
 
-  return Object
-    .keys(snapshot.val())
-    .map(key => ({...snapshot.val()[key], id: key}))
+    return Object
+      .keys(snapshot.val())
+      .map(key => ({...snapshot.val()[key], id: key}))
 
   // const response = await fetch(`${API}/movies`)
 
@@ -39,13 +40,13 @@ export const getAllPosts = async () => {
 }
 
 export const getPostById = async (id) => {
-  const snapshot = await get(ref(db, `posts/${id}`))
+    const snapshot = await get(ref(db, `posts/${id}`))
 
-  if (!snapshot.exists()) throw new Error('Post doesn\'t exist!')
-  return {
-    ...snapshot.val(),
-    id,
-  }
+    if (!snapshot.exists()) throw new Error('Post doesn\'t exist!')
+    return {
+      ...snapshot.val(),
+      id,
+    }
 }
 
 // export const getMoviesByName = async (name) => {
@@ -70,8 +71,15 @@ export const getPostById = async (id) => {
 //   return response.json()
 // }
 
-export const uploadPostThumbnail = async () => {
-  const storageRef = ref(storage, `files/${file.name}`)
-  const uploadTask = uploadBytesResumable(storageRef, file);
-  console.log(uploadTask)
+export const deletePost = async (id, username) => {
+  const snapshot = await get(ref(db, `posts/${id}`))
+  ///const userRef = await get(ref(db), `users/${username}/posts/${id}`)
+  if (!snapshot.exists()) throw new Error('Post doesn\'t exist!')
+  await remove(snapshot.ref)
+  return update(ref(db), {
+    [`users/${username}/posts/${id}`] : null,
+  })
+  
+  
+
 }

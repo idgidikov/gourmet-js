@@ -21,6 +21,8 @@ import Logout from './views/users/Logout'
 import Profile from './views/users/Profile'
 import ProfileEdit from './views/users/ProfileEdit'
 import Authenticated from './hoc/Authenticated'
+import EditPost from './views/forum/EditPost'
+import RemovePost from './views/forum/RemovePost'
 
 
 
@@ -84,6 +86,8 @@ function App() {
           <Route path="/blog-posts/" element={<AllPosts />} />
           <Route path="/create-blog-posts/" element={<Authenticated user={appState.user}><CreatePost /></Authenticated>}/>
           <Route path="/blog-post/:postId" element={<Authenticated user={appState.user}><DetailsPost /></Authenticated>} />
+          <Route path="/blog-post/removed" element={<Authenticated user={appState.user}><RemovePost /></Authenticated>} />
+          <Route path="/blog-post/edit/:postId" element={<Authenticated user={appState.user}><EditPost /></Authenticated>} />
           <Route path="/logout" element={<Authenticated user={appState.user}><Logout /></Authenticated>} />
           <Route path="/profile" element={<Authenticated user={appState.user}><Profile /></Authenticated>} />
           <Route path="/edit-profile" element={<Authenticated user={appState.user}><ProfileEdit /></Authenticated>} />
