@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@botom/quill-resize-module": "^2.0.0",
     "@heroicons/react": "^2.0.12",
     "daisyui": "^2.33.0",
     "firebase": "^9.13.0",

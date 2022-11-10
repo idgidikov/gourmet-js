@@ -9,7 +9,11 @@ import { modules, formats } from '../../react-quill/react-quill.config'
 import { postValidation } from '../../common/enums/post-validation.enum'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { storage } from '../../firebase/config.js'
+import ResizeModule from "@botom/quill-resize-module";
+import Quill from "quill";
 import { v4 } from 'uuid'
+
+Quill.register("modules/resize", ResizeModule);
 
 /// https://github.com/zenoamaro/react-quill
 const CreatePost = () => {

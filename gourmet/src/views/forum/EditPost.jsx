@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useEffect, useState, useParams} from 'react'
 
-function EditPost() {
+const EditPost = () => {
     const { postId } = useParams()
     const [post, setPost] = useState('');
     const [title, setTitle] = useState('');
