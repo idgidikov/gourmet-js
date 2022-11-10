@@ -6,18 +6,19 @@ import { AppContext } from '../../context/app.context'
 import { useContext } from 'react'
 import { useUpdateEmail } from 'react-firebase-hooks/auth';
 import UserValid from '../../common/enums/user-validation'
-import { update,push, ref } from 'firebase/database'
-import { db} from '/src/firebase/config'
+import { update, push, ref } from 'firebase/database'
+import { db } from '/src/firebase/config'
 import { uploadBytes, getDownloadURL } from 'firebase/storage'
 import { storage } from '../../firebase/config.js'
 import { v4 } from 'uuid'
 import { ref as sRef } from 'firebase/storage';
-import {useNavigate} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { logoutUser } from '../../services/auth.services'
 function ProfileEdit() {
     const { addToast, setAppState, user, userData } = useContext(AppContext)
     //console.log(userData.username)
     const [profilePic, setProfilePic] = useState('')
-    
+
     const [form, setForm] = useState({
         email: {
             value: '',
@@ -84,10 +85,10 @@ function ProfileEdit() {
         })
     }
     const handleFile = (e) => {
-        setProfilePic(prev=> e.target?.files[0])
+        setProfilePic(prev => e.target?.files[0])
     }
 
-     
+
     const editProfilePic = async (e) => {
         e.preventDefault();
         //console.log(profilePic);
@@ -101,10 +102,12 @@ function ProfileEdit() {
             await update(ref(db), {
                 [`users/${userData.username}/profile`]: url,
             })
-            
-            
+
+
+
             addToast('success', 'Profile picture updated')
-            navigate('/profile')
+            logoutUser()
+            navigate('/login')
         } catch (err) {
             addToast('error', err.message)
         }
@@ -120,10 +123,13 @@ function ProfileEdit() {
             await update(ref(db), {
                 [`users/${userData.username}/email`]: form.email.value,
             })
+
             addToast(
                 'success', 'E-mail changed successfully'
             )
-             navigate('/profile')
+          
+            logoutUser()
+            navigate('/login')
         } catch (err) {
             addToast('error', err.message)
         }
@@ -133,13 +139,15 @@ function ProfileEdit() {
 
 
     const editProfilePass = async () => {
+
         if (!form.password.valid) return addToast('error', 'Invalid password')
         if (!form.confirmPassword.valid) return addToast('error', 'Password does not match')
         try {
 
             await updatePassword(form.password.value)
             addToast('success', 'Password updated')
-            navigate('/edit-profile')
+            logoutUser()
+            navigate('/login')
         } catch (err) {
             addToast('error', err.message)
         }
