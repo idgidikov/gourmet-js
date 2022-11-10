@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation, Link } from 'react-router-dom'
 import { useContext, useState } from 'react'
 import { AppContext } from '../../context/app.context'
 import{loginUser} from '../../services/auth.services'
@@ -137,7 +137,7 @@ function Login() {
                     <button onClick = {login} className='border w-full my-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white'>Sign in</button>
                     <div className='flex justify-between'>
                         <p className='flex items-center mr-2'><input className='mr-2' type="checkbox" />Remember me</p>
-                        <p>Create an account</p>
+                        <Link to='/sign-up'>Create an account</Link>
                     </div>
                 </form>
             </div>

@@ -19,6 +19,7 @@ import Signup from './views/users/Signup'
 import DetailsPost from './views/forum/DetailsPost'
 import Logout from './views/users/Logout'
 import Profile from './views/users/Profile'
+import ProfileEdit from './views/users/ProfileEdit'
 
 
 
@@ -84,6 +85,8 @@ function App() {
           <Route path="/blog-post/:postId" element={<DetailsPost />} />
           <Route path="/logout" element={<Logout/>} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/edit-profile" element={<ProfileEdit />} />
+        
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <div className="toast">
