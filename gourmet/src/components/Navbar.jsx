@@ -2,8 +2,12 @@ import React from "react"
 import AllCocktails from "../views/recipes/AllCocktails"
 import {Link, NavLink} from "react-router-dom"
 import Home from "../views/Home"
+import { useContext } from 'react'
+import { AppContext } from '../context/app.context'
 
 const Navbar = function () {
+    const { addToast, setAppState, user,userData } = useContext(AppContext)
+
 
     return (
         <div className="navbar bg-base-100">
@@ -16,7 +20,7 @@ const Navbar = function () {
                 <li><NavLink to="/cocktails">Cocktails</NavLink></li>
                 <li><NavLink to="/meals" >Meal</NavLink></li>
                 <li><NavLink to="/blog-posts/">Blog</NavLink></li>
-                <li><NavLink to="/login">Login</NavLink></li>
+                {/* <li><NavLink to="/login">Login</NavLink></li> */}
                 </ul>
             </div>
 
@@ -24,6 +28,7 @@ const Navbar = function () {
                 <div className="form-control">
                 <input type="text" placeholder="Search" className="input input-bordered" />
                 </div>
+                {user===null ?<NavLink to="/login">Login</NavLink> :
                 <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                     <div className="w-10 rounded-full">
@@ -32,15 +37,18 @@ const Navbar = function () {
                 </label>
                 <ul tabIndex={0} className="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
                     <li>
-                    <a className="justify-between">
+                    <Link to='/profile' className="justify-between">
                         Profile
                         <span className="badge">New</span>
-                    </a>
+                    </Link>
                     </li>
-                    <li><a>Settings</a></li>
-                    <li><a>Logout</a></li>
+                    <li><Link to='/edit-profile'>Settings</Link></li>
+                    <li><Link to='/logout'>Logout</Link></li>
                 </ul>
-                </div>
+                </div>}
+                
+              
+                
             </div>
         </div>
     )
