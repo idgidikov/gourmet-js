@@ -8,6 +8,8 @@ import {createUser, getUser} from '../../services/users.services'
 import{registerUser,loginUser} from '../../services/auth.services'
 
 
+
+
 function Signup() {
     //const [formRole, setFormRole] = useState('login')
     const { addToast, setAppState, ...appState } = useContext(AppContext)
@@ -73,8 +75,8 @@ function Signup() {
             email: {
                 value,
                 touched: true,
-                valid: value.length >= 4 && value.length <= 32,
-                error: value.length < 4 ? 'Minimum email length: 4' : 'Maximum email length: 32'
+                valid: value.length >= UserValid.EMAIL_MIN_LENGTH && value.length <= UserValid.EMAIL_MAX_LENGTH,
+                error: value.length < UserValid.EMAIL_MIN_LENGTH ? `Minimum email length: ${UserValid.EMAIL_MIN_LENGTH}` : `Maximum email length: ${UserValid.EMAIL_MAX_LENGTH}`
             },
         })
     }
@@ -86,8 +88,8 @@ function Signup() {
             password: {
                 value,
                 touched: true,
-                valid: value.length >= 4 && value.length <= 60,
-                error: value.length < 4 ? 'Minimum password lenght: 4' : 'Maximum password lenght: 32'
+                valid: value.length >= UserValid.PASS_MIN_LENGTH && value.length <= UserValid.PASS_MAX_LENGTH,
+                error: value.length < UserValid.PASS_MIN_LENGTH ? `Minimum password length: ${UserValid.PASS_MIN_LENGTH}` : `Maximum password length: ${UserValid.PASS_MAX_LENGTH}`
             },
         })
     }
@@ -100,8 +102,8 @@ function Signup() {
             confirmPassword: {
                 value,
                 touched: true,
-                valid: value.length >= 4 && value.length <= 60 && value === form.password.value,
-                error: value.length < 4 ? 'Minimum confirmPassword lenght: 4' : 'Maximum cofirmPassword lenght: 60'
+                valid: value.length >= UserValid.PASS_MIN_LENGTH && value.length <=  value.length <= UserValid.PASS_MAX_LENGTH && value === form.password.value,
+                error: value.length < UserValid.PASS_MIN_LENGTH ? `Minimum password length: ${UserValid.PASS_MIN_LENGTH}` : `Maximum password length: ${UserValid.PASS_MAX_LENGTH}`
             },
         })
     }
@@ -111,8 +113,8 @@ function Signup() {
             name: {
                 value,
                 touched: true,
-                valid: value.length >= 4 && value.length <= 60,
-                error: value.length < 4 ? 'Minimum name lenght: 4' : 'Maximum name lenght: 60'
+                valid: value.length >=UserValid.FIRST_NAME_MIN_LENGTH   && value.length <= UserValid.FIRST_NAME_MAX_LENGTH,
+                error: value.length < UserValid.FIRST_NAME_MIN_LENGTH  ? `Minimum name length:${ UserValid.FIRST_NAME_MIN_LENGTH} ` : `Maximum name length:${ UserValid.FIRST_NAME_MAX_LENGTH} `
             }
         })
     }
@@ -123,8 +125,8 @@ function Signup() {
             last: {
                 value,
                 touched: true,
-                valid: value.length >= 4 && value.length <= 60,
-                error: value.length < 4 ? 'Minimum last lenght: 4' : 'Maximum last lenght: 60'
+                valid: value.length >= UserValid.LAST_NAME_MIN_LENGTH && value.length <= UserValid.LAST_NAME_MAX_LENGTH,
+                error: value.length < UserValid.LAST_NAME_MIN_LENGTH  ? `Minimum  last name length:${ UserValid.FIRST_LAST_NAME_MIN_LENGTH} ` : `Maximum last name length:${ UserValid.FIRST_LAST_NAME_MAX_LENGTH} `
             }
         })
     }
