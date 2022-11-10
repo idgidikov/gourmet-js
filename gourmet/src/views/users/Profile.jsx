@@ -14,10 +14,11 @@ function Profile() {
     // console.log(username)
     
 
+    console.log(userData.profile)
 
     return (<>
         <div className="card card-side bg-base-100 shadow-xl">
-            <figure><img src="https://placeimg.com/200/280/arch" alt="Movie" /></figure>
+            <figure><img className='w-72' src={userData?.profile} alt="Movie" /></figure>
             <div className="card-body">
                 <h2 className="card-title"> Hello {username}
                 </h2>
