@@ -12,11 +12,12 @@ import { uploadBytes, getDownloadURL } from 'firebase/storage'
 import { storage } from '../../firebase/config.js'
 import { v4 } from 'uuid'
 import { ref as sRef } from 'firebase/storage';
+import {useNavigate} from 'react-router-dom'
 function ProfileEdit() {
     const { addToast, setAppState, user, userData } = useContext(AppContext)
     //console.log(userData.username)
     const [profilePic, setProfilePic] = useState('')
-
+    
     const [form, setForm] = useState({
         email: {
             value: '',
@@ -41,6 +42,7 @@ function ProfileEdit() {
     })
     const [updatePassword, updating, error] = useUpdatePassword(auth);
     const [updateEmail, ...rest] = useUpdateEmail(auth);
+    const navigate = useNavigate()
     const updateNewPassword = (value = '') => {
         // username between 10 and 60
 
@@ -85,21 +87,24 @@ function ProfileEdit() {
         setProfilePic(prev=> e.target?.files[0])
     }
 
-     console.log(profilePic);
+     
     const editProfilePic = async (e) => {
-        e.preventDefault()
+        e.preventDefault();
         //console.log(profilePic);
         const imageRef = sRef(storage, `profilePics/${v4()}`)
         const file = profilePic
         try {
             const result = await uploadBytes(imageRef, file)
+            console.log(result)
             const url = await getDownloadURL(result.ref)
-            
+            setProfilePic(url)
             await update(ref(db), {
                 [`users/${userData.username}/profile`]: url,
             })
-            setProfilePic('')
+            
+            
             addToast('success', 'Profile picture updated')
+            navigate('/profile')
         } catch (err) {
             addToast('error', err.message)
         }
@@ -118,6 +123,7 @@ function ProfileEdit() {
             addToast(
                 'success', 'E-mail changed successfully'
             )
+             navigate('/profile')
         } catch (err) {
             addToast('error', err.message)
         }
@@ -133,6 +139,7 @@ function ProfileEdit() {
 
             await updatePassword(form.password.value)
             addToast('success', 'Password updated')
+            navigate('/edit-profile')
         } catch (err) {
             addToast('error', err.message)
         }
@@ -142,7 +149,7 @@ function ProfileEdit() {
     return (<>
         <div><h2>Edit Profile</h2></div>
         <br />
-        <form action="">
+        <form action="/profile">
             <input type="file" accept='image/*' onChange={handleFile} className="file-input file-input-bordered file-input-primary w-full max-w-xs" />
             <br />
             <button className="btn btn-primary" onClick={editProfilePic} >
