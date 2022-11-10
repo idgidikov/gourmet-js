@@ -19,7 +19,8 @@ const CreatePost = () => {
     const [titleValidator, setTitleValidator] = useState(false);
     const [postValidator, setPostValidator] = useState(false);
 
-    const { addToast } = useContext(AppContext)
+    const { user, addToast, userData } = useContext(AppContext)
+    const username = userData.username
 
     const handleFileUpload = (e) => {
       setThumbnail(e.target?.files[0]);
@@ -63,7 +64,7 @@ const CreatePost = () => {
           const url = await getDownloadURL(result.ref)
           setThumbnail(url)
 
-          await createPost({title, post, url})
+          await createPost({title, post, url, username})
           showAllPosts()
         } catch (error) {
           addToast('error', error.message)

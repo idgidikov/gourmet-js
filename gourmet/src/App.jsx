@@ -20,6 +20,7 @@ import DetailsPost from './views/forum/DetailsPost'
 import Logout from './views/users/Logout'
 import Profile from './views/users/Profile'
 import ProfileEdit from './views/users/ProfileEdit'
+import Authenticated from './hoc/Authenticated'
 
 
 
@@ -81,11 +82,11 @@ function App() {
           <Route path="/meals" element={<AllMeals />} />
           <Route path="/meals/:id" element={ <MealDetails />} />
           <Route path="/blog-posts/" element={<AllPosts />} />
-          <Route path="/create-blog-posts/" element={<CreatePost />} />
-          <Route path="/blog-post/:postId" element={<DetailsPost />} />
-          <Route path="/logout" element={<Logout/>} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/edit-profile" element={<ProfileEdit />} />
+          <Route path="/create-blog-posts/" element={<Authenticated user={appState.user}><CreatePost /></Authenticated>}/>
+          <Route path="/blog-post/:postId" element={<Authenticated user={appState.user}><DetailsPost /></Authenticated>} />
+          <Route path="/logout" element={<Authenticated user={appState.user}><Logout /></Authenticated>} />
+          <Route path="/profile" element={<Authenticated user={appState.user}><Profile /></Authenticated>} />
+          <Route path="/edit-profile" element={<Authenticated user={appState.user}><ProfileEdit /></Authenticated>} />
         
           <Route path="/*" element={<NotFound />} />
         </Routes>

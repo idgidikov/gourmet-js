@@ -4,21 +4,20 @@ import { uploadBytesResumable } from 'firebase/storage'
 
 import { API } from '../common/constants'
 
-export const createPost = async({title, post, url}) => {
+export const createPost = async({title, post, url, username}) => {
   const body = {
     title,
     post,
     url,
+    author: username,
     addedOn: Date.now(),
   }
 
-  const result = await push(ref(db, `posts`), body)
+  const { key } = await push(ref(db, `posts`), body)
   
-  return result 
-
-  // return update(ref(db), {
-  //   [`posts/${key}`] : true,
-  // })
+  return update(ref(db), {
+    [`users/${username}/posts/${key}`] : true,
+  })
 }
 
 export const getAllPosts = async () => {

@@ -8,7 +8,7 @@ import { getPostById } from '../../services/post.services'
 
 function DetailsPost() {
     const { postId } = useParams()
-    const { addToast, setAppState } = useContext(AppContext)
+    const { addToast, setAppState, userData } = useContext(AppContext)
 
     const [state, setState] = useState({
         post: '',
@@ -31,6 +31,12 @@ function DetailsPost() {
 
     return (
         <div className="container">
+            <div className="avatar">
+                <div className="w-24 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                    {/* <img src="https://placeimg.com/192/192/people" /> */}
+                    <p className="user-name">{userData.username}</p>
+                </div>
+            </div>
             <figure><img className="blog-detail-thumbnail" src={state.url} alt="Album"/></figure>
             <h1 className="text-2xl text-center font-bold pt-8 mb-20" dangerouslySetInnerHTML={{__html:state.title}}></h1>
             <div className="card lg:card-side bg-base-100 shadow-xl">

@@ -121,18 +121,19 @@ function Login() {
                 <form className='max-w-[400px] w-full mx-auto bg-white-p-4' action="">
                     <h2 className='text-4xl font-bold text-center py-6'>BRAND</h2>
                     <div className='flex flex-col py-2'>
-                        <label htmlFor="">Username</label>
+                        <label htmlFor="">Email</label>
                         <input
+
                             value={form.email.value}
                             onChange={e => updateEmail(e.target.value)} 
-                            className='border p-2' type="text" />
+                            className='border p-2 bg-black' type="text" />
                     </div>
                     <div className='flex flex-col py-2'>
                         <label htmlFor="">Password</label>
                         <input
                         value={form.password.value}
                         onChange={e => updatePassword(e.target.value)} 
-                         className='border p-2' type="password" />
+                         className='border p-2  bg-black' type="password" />
                     </div>
                     <button onClick = {login} className='border w-full my-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white'>Sign in</button>
                     <div className='flex justify-between'>
