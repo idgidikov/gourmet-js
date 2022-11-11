@@ -42,7 +42,7 @@ function ProfileEdit() {
 
     })
     const [updatePassword, updating, error] = useUpdatePassword(auth);
-    const [updateEmail, ...rest] = useUpdateEmail(auth);
+    const [updateEmail] = useUpdateEmail(auth);
     const navigate = useNavigate()
     const updateNewPassword = (value = '') => {
         // username between 10 and 60
