@@ -73,7 +73,7 @@ function ProfileEdit() {
     }
     const updateNewEmail = (value = '') => {
         // username between 4 and 20
-
+        
         setForm({
             ...form,
             email: {

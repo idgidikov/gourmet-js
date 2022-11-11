@@ -81,7 +81,7 @@ function Signup() {
         })
     }
     const updatePassword = (value = '') => {
-        // username between 10 and 60
+        
 
         setForm({
             ...form,

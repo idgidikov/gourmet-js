@@ -27,9 +27,7 @@ function Login() {
         },
     })
 
-
     const updateEmail = (value = '') => {
-        
 
         setForm({
             ...form,
