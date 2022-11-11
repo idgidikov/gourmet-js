@@ -1,7 +1,14 @@
 import React from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useEffect, useState, useParams} from 'react'
+import { modules, formats } from '../../react-quill/react-quill.config'
+import { postValidation } from '../../common/enums/post-validation.enum'
+import { useEffect, useState} from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { AppContext } from '../../context/app.context'
+import { getPostById } from '../../services/post.services'
+
 
 const EditPost = () => {
     const { postId } = useParams()
@@ -10,12 +17,13 @@ const EditPost = () => {
     const [thumbnail, setThumbnail] = useState('');
     const [titleValidator, setTitleValidator] = useState(false);
     const [postValidator, setPostValidator] = useState(false);
-    const { addToast, setAppState } = useContext(AppContext)
     const [state, setState] = useState({
         post: '',
         title: '',
         url: '',
     })
+    const { user, addToast, userData } = useContext(AppContext)
+    const username = userData.username
     useEffect(() => {
         getPostById(postId)
             .then(p => {
@@ -30,7 +38,6 @@ const EditPost = () => {
             .catch(e => addToast('error', e.message))
     }, [postId]);
 
-    const username = userData.username
 
     const handleFileUpload = (e) => {
       setThumbnail(e.target?.files[0]);
@@ -87,7 +94,7 @@ const EditPost = () => {
             <label className="label">Title of you publication: </label>
             <input 
             className="input input-bordered border-white w-full max-w-full mb-6"
-            value={title}
+            value={state.title}
             onChange={e => setTitle(e.target.value)}
             type="text" />
             <label className="label">Choose Thumbnail for your publication</label>
@@ -99,7 +106,7 @@ const EditPost = () => {
             theme="snow"
             modules = {modules}
             formats = {formats}
-            value = {post}
+            value = {state.post}
             onChange={setPost} 
             />
             <button className="btn btn-primary mt-14" onClick={sendPost}>Publish</button>
