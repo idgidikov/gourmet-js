@@ -8,6 +8,10 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from '../../context/app.context'
 import { getPostById } from '../../services/post.services'
+import { createPost } from '../../services/post.services'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { storage } from '../../firebase/config.js'
+import { v4 } from 'uuid'
 
 
 const EditPost = () => {
@@ -27,13 +31,16 @@ const EditPost = () => {
     useEffect(() => {
         getPostById(postId)
             .then(p => {
-                setState(state => ({
-                    ...state,
-                    post: p.post,
-                    title: p.title,
-                    url: p.url,
+              setTitle(p.title)
+              setPost(p.post)
+              
+                // setState(state => ({
+                //     ...state,
+                //     post: p.post,
+                //     title: p.title,
+                //     url: p.url,
 
-                }))
+                // }))
             })
             .catch(e => addToast('error', e.message))
     }, [postId]);
@@ -94,7 +101,7 @@ const EditPost = () => {
             <label className="label">Title of you publication: </label>
             <input 
             className="input input-bordered border-white w-full max-w-full mb-6"
-            value={state.title}
+            value={title}
             onChange={e => setTitle(e.target.value)}
             type="text" />
             <label className="label">Choose Thumbnail for your publication</label>
@@ -106,7 +113,7 @@ const EditPost = () => {
             theme="snow"
             modules = {modules}
             formats = {formats}
-            value = {state.post}
+            value = {post}
             onChange={setPost} 
             />
             <button className="btn btn-primary mt-14" onClick={sendPost}>Publish</button>

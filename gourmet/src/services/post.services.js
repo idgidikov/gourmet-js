@@ -78,6 +78,7 @@ export const deletePost = async (id, username) => {
   await remove(snapshot.ref)
   return update(ref(db), {
     [`users/${username}/posts/${id}`] : null,
+    ///[`comments/${username}/posts/${id}`] : null,
   })
   
   
