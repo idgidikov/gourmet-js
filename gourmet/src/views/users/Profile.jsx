@@ -32,7 +32,25 @@ function Profile() {
                 </div>
             </div>
         </div>
-        # Responsiv
+        <h2 className="my-post mb-8">My Posts</h2>
+        <div className="overflow-x-auto w-full">
+            <table className="table w-full">
+                <thead>
+                <tr>
+                    <th>
+                    <label>
+                        <input type="checkbox" className="checkbox" />
+                    </label>
+                    </th>
+                    <th>Name</th>
+                    <th>Job</th>
+                    <th>Favorite Color</th>
+                    <th></th>
+                </tr>
+                </thead>
+                
+            </table>
+        </div>
     </>
 
 

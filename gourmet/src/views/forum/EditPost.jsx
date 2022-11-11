@@ -1,7 +1,18 @@
 import React from 'react'
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useEffect, useState, useParams} from 'react'
+import { modules, formats } from '../../react-quill/react-quill.config'
+import { postValidation } from '../../common/enums/post-validation.enum'
+import { useEffect, useState} from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { useContext } from 'react'
+import { AppContext } from '../../context/app.context'
+import { getPostById } from '../../services/post.services'
+import { createPost } from '../../services/post.services'
+import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import { storage } from '../../firebase/config.js'
+import { v4 } from 'uuid'
+
 
 const EditPost = () => {
     const { postId } = useParams()
@@ -10,27 +21,30 @@ const EditPost = () => {
     const [thumbnail, setThumbnail] = useState('');
     const [titleValidator, setTitleValidator] = useState(false);
     const [postValidator, setPostValidator] = useState(false);
-    const { addToast, setAppState } = useContext(AppContext)
     const [state, setState] = useState({
         post: '',
         title: '',
         url: '',
     })
+    const { user, addToast, userData } = useContext(AppContext)
+    const username = userData.username
     useEffect(() => {
         getPostById(postId)
             .then(p => {
-                setState(state => ({
-                    ...state,
-                    post: p.post,
-                    title: p.title,
-                    url: p.url,
+              setTitle(p.title)
+              setPost(p.post)
+              
+                // setState(state => ({
+                //     ...state,
+                //     post: p.post,
+                //     title: p.title,
+                //     url: p.url,
 
-                }))
+                // }))
             })
             .catch(e => addToast('error', e.message))
     }, [postId]);
 
-    const username = userData.username
 
     const handleFileUpload = (e) => {
       setThumbnail(e.target?.files[0]);
