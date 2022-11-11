@@ -102,12 +102,19 @@ function ProfileEdit() {
             await update(ref(db), {
                 [`users/${userData.username}/profile`]: url,
             })
-
-
+            //console.log(url)
+            setAppState(prev => ({
+                ...prev,
+                userData: {
+                    ...userData,
+                    profile: url,
+                }
+            })
+            )
 
             addToast('success', 'Profile picture updated')
-            logoutUser()
-            navigate('/login')
+            //logoutUser()
+            navigate('/profile')
         } catch (err) {
             addToast('error', err.message)
         }
