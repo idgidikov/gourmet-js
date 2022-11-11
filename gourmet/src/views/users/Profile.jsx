@@ -5,7 +5,7 @@ import { useUpdatePassword } from 'react-firebase-hooks/auth';
 import { AppContext } from '../../context/app.context'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom';
-
+import UserValid from '../../common/enums/user-validation'
 function Profile() {
     const { addToast, setAppState, user,userData } = useContext(AppContext)
     
@@ -18,7 +18,7 @@ function Profile() {
 
     return (<>
         <div className="card card-side bg-base-100 shadow-xl">
-            <figure><img className='w-72' src={userData?.profile} alt="Movie" /></figure>
+            <figure><img className='w-72' src={userData ? userData.profile : 'https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg'} alt="Movie" /></figure>
             <div className="card-body">
                 <h2 className="card-title"> Hello {username}
                 </h2>

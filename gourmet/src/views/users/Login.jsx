@@ -4,6 +4,7 @@ import { useContext, useState } from 'react'
 import { AppContext } from '../../context/app.context'
 import{loginUser} from '../../services/auth.services'
 import {getUser} from '../../services/users.services'
+import UserValid from '../../common/enums/user-validation'
 function Login() {
     //const [formRole, setFormRole] = useState('login')
     const { addToast, setAppState, ...appState } = useContext(AppContext)
@@ -11,12 +12,7 @@ function Login() {
     const location = useLocation()
 
     const [form, setForm] = useState({
-        // username: {
-        //     value: '',
-        //     touched: false,
-        //     valid: false,
-        //     error: '',
-        // },
+  
         email: {
             value: '',
             touched: false,
@@ -31,29 +27,17 @@ function Login() {
         },
     })
 
-    const updateUsername = (value = '') => {
-        // username between 4 and 20
 
-        setForm({
-            ...form,
-            username: {
-                value,
-                touched: true,
-                valid: value.length >= 4 && value.length <= 20,
-                error: value.length < 4 ? 'Minimum username lenght: 4' : 'Maximum username lenght: 20'
-            },
-        })
-    }
     const updateEmail = (value = '') => {
-        // username between 4 and 20
+        
 
         setForm({
             ...form,
             email: {
                 value,
                 touched: true,
-                valid: value.length >= 4 && value.length <= 32,
-                error: value.length < 4 ? 'Minimum email length: 4' : 'Maximum email length: 32'
+                valid: value.length >= UserValid.EMAIL_MIN_LENGTH && value.length <= UserValid.EMAIL_MAX_LENGTH,
+                error: value.length < UserValid.EMAIL_MIN_LENGTH ? `Minimum email length: ${UserValid.EMAIL_MIN_LENGTH}` : `Maximum email length: ${UserValid.EMAIL_MAX_LENGTH}`
             },
         })
     }
@@ -61,15 +45,15 @@ function Login() {
  
 
     const updatePassword = (value = '') => {
-        // username between 10 and 60
+        
 
         setForm({
             ...form,
             password: {
                 value,
                 touched: true,
-                valid: value.length >= 4 && value.length <= 60,
-                error: value.length < 4 ? 'Minimum password lenght: 4' : 'Maximum password lenght: 60'
+                valid: value.length >= UserValid.PASS_MIN_LENGTH && value.length <= UserValid.PASS_MAX_LENGTH,
+                error: value.length < UserValid.PASS_MIN_LENGTH ? `Minimum password length: ${UserValid.PASS_MIN_LENGTH}` : `Maximum password length: ${UserValid.PASS_MAX_LENGTH}`
             },
         })
     }
@@ -83,14 +67,7 @@ function Login() {
 
         try {
 
-            // const user =  await getUser(form.username.value)
-            // alert(user)
-            // console.log(user)
-            // const { email } = user
-            // console.log(email)
-        
-            //  console.log(user)
-
+     
             
             const credentials = await loginUser(form.email.value, form.password.value)
 

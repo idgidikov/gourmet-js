@@ -83,3 +83,24 @@ export const deletePost = async (id, username) => {
   
 
 }
+
+
+export const togglePostLikes = async (postId, author, like = true) => {
+  return update(ref(db), {
+    [`users/${author}/likedPosts/${postId}`]: like || null,
+    [`posts/${postId}/likedBy/${author}`]: like || null,
+  })
+}
+// export const likePost =  (id, username) => {
+//   const updateLike = {}
+//   updateLike[`posts/${id}/likesBy/${username}`] = true
+//   updateLike[`users/${username}/likesPosts/${id}`] = true
+//   return update(ref(db), updateLike)
+// }
+
+// export const unlikePost =  (id, username) => {
+//   const updateLike = {}
+//   updateLike[`posts/${id}/likesBy/${username}`] = null
+//   updateLike[`users/${username}/likesPosts/${id}`] = null
+//   return update(ref(db), updateLike)
+// }
