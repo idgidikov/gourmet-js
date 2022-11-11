@@ -23,12 +23,14 @@ import ProfileEdit from './views/users/ProfileEdit'
 import Authenticated from './hoc/Authenticated'
 import EditPost from './views/forum/EditPost'
 import RemovePost from './views/forum/RemovePost'
+import { useLocation,useNavigate } from 'react-router-dom'
 
 
 
 function App() {
   const [user, loading, error] = useAuthState(auth)
-
+  const location = useLocation()
+  const navigate = useNavigate()
   const [appState, setAppState] = useState({
     user: user ? { email: user.email, uid: user.uid } : null,
     userData: null,
@@ -43,6 +45,9 @@ function App() {
       ...appState,
       user: user ? { email: user.email, uid: user.uid } : null,
     })
+    if (location.state?.from?.pathname) {
+      navigate(location.state.from.pathname)
+    }
   }, [user])
 
   useEffect(() => {
