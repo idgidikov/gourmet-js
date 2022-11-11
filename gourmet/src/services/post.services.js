@@ -21,6 +21,19 @@ export const createPost = async({title, post, url, username}) => {
     })
 }
 
+export const updatePost = async({postId, title, post, url, username}) => {
+  const body = {
+    title,
+    post,
+    url,
+    author: username,
+    addedOn: Date.now(),
+  }
+
+  await update(ref(db, `posts/${postId}`), body)
+
+}
+
 export const getAllPosts = async () => {
     const snapshot = await get(ref(db, 'posts'))
 
