@@ -134,9 +134,20 @@ function ProfileEdit() {
             addToast(
                 'success', 'E-mail changed successfully'
             )
+            setAppState(prev => ({
+                ...prev,
+                userData: {
+                    ...userData,
+                    email: form.email.value,
+                },user: {
+                    ...user,
+                    email: form.email.value,
+                }
+            })
+            )
           
-            logoutUser()
-            navigate('/login')
+            //logoutUser()
+            navigate('/profile')
         } catch (err) {
             addToast('error', err.message)
         }
@@ -153,8 +164,8 @@ function ProfileEdit() {
 
             await updatePassword(form.password.value)
             addToast('success', 'Password updated')
-            logoutUser()
-            navigate('/login')
+            ///logoutUser()
+            navigate('/profile')
         } catch (err) {
             addToast('error', err.message)
         }
