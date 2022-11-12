@@ -1,30 +1,38 @@
 import React from 'react'
 import { auth } from '/src/firebase/config'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useUpdatePassword } from 'react-firebase-hooks/auth';
 import { AppContext } from '../../context/app.context'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom';
+import UserValid from '../../common/enums/user-validation'
+import { getUserPosts } from '../../services/users.services'
+import UserPostRows from '../../components/users/UserPostRows'
 
 function Profile() {
     const { addToast, setAppState, user, userData } = useContext(AppContext)
-    
-    //const {email,uid}=user
-     const {email, firstName, lastName, username} = userData
-    // console.log(username)
+    const {email, firstName, lastName, username} = userData
+    const [posts, setPosts] = useState([])
+
     
 
-    console.log(userData.profile)
+    useEffect(() => {
+        getUserPosts(username)
+            .then((post) => {
+                setPosts(post)
+            })
+            .catch((error) => {console.log(error), addToast('error', error.message)})
+    }, [username])
 
     return (<>
         <div className="card card-side bg-base-100 shadow-xl">
-            <figure><img className='w-72' src={userData?.profile} alt="Movie" /></figure>
+            <figure><img className='w-72' src={userData ? userData.profile : 'https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg'} alt="Movie" /></figure>
             <div className="card-body">
                 <h2 className="card-title"> Hello {username}
                 </h2>
-                <p>Email :  {email}</p>
-                <p>FirstName :  {firstName}</p>
-                <p>LastName :  {lastName}</p>
+                <p ><span className="badge badge-accent">Email:</span>  {email}</p>
+                <p><span className="badge badge-accent">First name:</span>  {firstName}</p>
+                <p><span className="badge badge-accent">Last name:</span>  {lastName}</p>
                 
                 {/* <p>{email}</p> */}
                 <div className="card-actions justify-end">
@@ -32,59 +40,21 @@ function Profile() {
                 </div>
             </div>
         </div>
-        <h2 className="my-post mb-8">My Posts</h2>
         <div className="overflow-x-auto w-full">
             <table className="table w-full">
                 <thead>
                     <tr>
-                        <th>
-                        <label>
-                            <input type="checkbox" className="checkbox" />
-                        </label>
-                        </th>
-                        <th>Name</th>
-                        <th>Job</th>
-                        <th>Favorite Color</th>
-                        <th></th>
+                        
+                        <th>My Posts</th>
+                       
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <th>
-                        <label>
-                            <input type="checkbox" className="checkbox" />
-                        </label>
-                        </th>
-                        <td>
-                        <div className="flex items-center space-x-3">
-                            <div className="avatar">
-                            <div className="mask mask-squircle w-12 h-12">
-                                <img src="/tailwind-css-component-profile-2@56w.png" alt="Avatar Tailwind CSS Component" />
-                            </div>
-                            </div>
-                            <div>
-                            <div className="font-bold">Hart Hagerty</div>
-                            <div className="text-sm opacity-50">United States</div>
-                            </div>
-                        </div>
-                        </td>
-                        <td>
-                        Zemlak, Daniel and Leannon
-                        <br/>
-                        <span className="badge badge-ghost badge-sm">Desktop Support Technician</span>
-                        </td>
-                        <td>Purple</td>
-                        <th>
-                        <button className="btn btn-ghost btn-xs">details</button>
-                        </th>
-                    </tr>
+                    {posts.map(post => <UserPostRows key={post.id} post={post} />)}
                 </tbody>
                 <tfoot>
                 <tr>
-                    <th></th>
-                    <th>Name</th>
-                    <th>Job</th>
-                    <th>Favorite Color</th>
+                   
                     <th></th>
                 </tr>
                 </tfoot>

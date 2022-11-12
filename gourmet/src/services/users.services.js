@@ -1,7 +1,7 @@
 import { ref, push, get, set, update, query, equalTo, orderByChild, orderByKey } from 'firebase/database'
 import { db } from '../firebase/config'
 import { userRole } from '../common/enums/user-role.enum'
-import getPostById from './post.services'
+//import getPostById from './post.services'
 
 
 export const getUser = async (username) => {
@@ -48,15 +48,14 @@ export const createUser = async (uid, username,email,firstName,lastName, role = 
 }
 
 export const getUserPosts = async (username) => {
-  const userPostsIds = await get(db, `users/${username}/posts`)
-  const snapshot = await get(ref(db, 'posts'))
-
+    const userPosts = await get(ref(db, `users/${username}/posts`))
+    const userPostIds = Object.keys(userPosts.val())
+    const snapshot = await get(ref(db, 'posts'))
+    
     if (!snapshot.exists()) {
       return []
     }
-
-    return Object
-      .keys(snapshot.val())
+    return userPostIds
       .map(key => ({...snapshot.val()[key], id: key}))
 
 }

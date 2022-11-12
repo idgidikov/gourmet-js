@@ -13,7 +13,7 @@ import { storage } from '../../firebase/config.js'
 import { v4 } from 'uuid'
 import { ref as sRef } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom'
-import { logoutUser } from '../../services/auth.services'
+
 function ProfileEdit() {
     const { addToast, setAppState, user, userData } = useContext(AppContext)
     //console.log(userData.username)
@@ -52,8 +52,8 @@ function ProfileEdit() {
             password: {
                 value,
                 touched: true,
-                valid: value.length >= 4 && value.length <= 60,
-                error: value.length < 4 ? 'Minimum password lenght: 4' : 'Maximum password lenght: 32'
+                valid: value.length >= UserValid.PASS_MIN_LENGTH && value.length <= UserValid.PASS_MAX_LENGTH,
+                error: value.length < UserValid.PASS_MIN_LENGTH ? `Minimum password length: ${UserValid.PASS_MIN_LENGTH}` : `Maximum password length: ${UserValid.PASS_MAX_LENGTH}`
             },
         })
     }
@@ -66,14 +66,14 @@ function ProfileEdit() {
             confirmPassword: {
                 value,
                 touched: true,
-                valid: value.length >= 4 && value.length <= 60 && value === form.password.value,
-                error: value.length < 4 ? 'Minimum confirmPassword lenght: 4' : 'Maximum cofirmPassword lenght: 60'
+                valid: value.length >= UserValid.PASS_MIN_LENGTH && value.length <=  value.length <= UserValid.PASS_MAX_LENGTH && value === form.password.value,
+                error: value.length < UserValid.PASS_MIN_LENGTH ? `Minimum password length: ${UserValid.PASS_MIN_LENGTH}` : `Maximum password length: ${UserValid.PASS_MAX_LENGTH}`
             },
         })
     }
     const updateNewEmail = (value = '') => {
         // username between 4 and 20
-
+        
         setForm({
             ...form,
             email: {
@@ -146,7 +146,7 @@ function ProfileEdit() {
             })
             )
           
-            //logoutUser()
+            
             navigate('/profile')
         } catch (err) {
             addToast('error', err.message)
@@ -173,6 +173,7 @@ function ProfileEdit() {
 
 
     return (<>
+        <div className="card w-96 bg-base-100 shadow-xl">
         <div><h2>Edit Profile</h2></div>
         <br />
         <form action="/profile">
@@ -208,7 +209,7 @@ function ProfileEdit() {
         <button className="btn btn-primary" onClick={editProfileEmail}>
             Update Email
         </button>
-
+        </div>
     </>
 
 

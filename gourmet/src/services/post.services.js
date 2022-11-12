@@ -36,7 +36,6 @@ export const updatePost = async({postId, title, post, url, username}) => {
 
 export const getAllPosts = async () => {
     const snapshot = await get(ref(db, 'posts'))
-
     if (!snapshot.exists()) {
       return []
     }
@@ -62,27 +61,7 @@ export const getPostById = async (id) => {
     }
 }
 
-// export const getMoviesByName = async (name) => {
-//   const response = await fetch(`${API}/movies?name=${name}`)
 
-//   if (!response.ok) throw new Error('Something went wrong!')
-
-//   return response.json()
-// }
-
-// export const addMovieComment = async (movieId, content) => {
-//   const response = await fetch(`${API}/movies/${movieId}/comments`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({ content }),
-//   })
-
-//   if (!response.ok) throw new Error('Something went wrong!')
-
-//   return response.json()
-// }
 
 export const deletePost = async (id, username) => {
   const snapshot = await get(ref(db, `posts/${id}`))
@@ -94,6 +73,12 @@ export const deletePost = async (id, username) => {
     ///[`comments/${username}/posts/${id}`] : null,
   })
   
-  
+}
 
+
+export const togglePostLikes = async (postId, author, like = true) => {
+  return update(ref(db), {
+    [`users/${author}/likedPosts/${postId}`]: like || null,
+    [`posts/${postId}/likedBy/${author}`]: like || null,
+  })
 }
