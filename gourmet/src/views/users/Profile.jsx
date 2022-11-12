@@ -36,7 +36,7 @@ function Profile() {
                 
                 {/* <p>{email}</p> */}
                 <div className="card-actions justify-end">
-                    <Link to='/edit-profile' className="btn btn-primary">Edit</Link>
+                    <Link to='/edit-profile' className="btn btn-primary">Edit Info</Link>
                 </div>
             </div>
         </div>
@@ -46,7 +46,9 @@ function Profile() {
                     <tr>
                         
                         <th>My Posts</th>
-                       
+                        <th>
+                        <Link to="/create-blog-posts/"><p className="btn btn-primary">Create Post</p></Link>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
