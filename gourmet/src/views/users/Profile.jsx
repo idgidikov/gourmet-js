@@ -10,8 +10,9 @@ import { getUserPosts } from '../../services/users.services'
 import UserPostRows from '../../components/users/UserPostRows'
 
 function Profile() {
-    const { addToast, setAppState, user, userData } = useContext(AppContext)
-   
+    const { addToast, setAppState, ...appState } = useContext(AppContext)
+    const user = appState?.user
+    const userData = appState?.userData
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
@@ -27,7 +28,7 @@ function Profile() {
 
     return (<>
         <div className="card card-side bg-base-100 shadow-xl">
-            <figure><img className='w-72' src={userData ? userData.profile : 'https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg'} alt="Movie" /></figure>
+            <figure><img className='w-72' src={userData ? userData?.profile : 'https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg'} alt="Movie" /></figure>
             <div className="card-body">
                 <h2 className="card-title"> Hello {userData?.username}
                 </h2>
@@ -48,12 +49,12 @@ function Profile() {
                         
                         <th>My Posts</th>
                         <th>
-                        <Link to="/create-blog-posts/"><p className="btn btn-primary">Create Post</p></Link>
+                        <Link to="/create-blog-posts/"><p className="btn btn-primary" disabled={!userData?.isActive}>Create Post</p></Link>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
-                    {posts.map(post => <UserPostRows key={post.id} post={post} />)}
+                    {posts?.map(post => <UserPostRows key={post?.id} post={post} />)}
                 </tbody>
                 <tfoot>
                 <tr>

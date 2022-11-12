@@ -36,6 +36,7 @@ function App() {
   const [appState, setAppState] = useState({
     user: user ? { email: user.email, uid: user.uid } : null,
     userData: null,
+    
   })
   /**
    * @type {[Array<{ class: string, message: string }>, Function]}

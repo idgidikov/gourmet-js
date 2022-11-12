@@ -96,7 +96,7 @@ const CreatePost = () => {
             value = {post}
             onChange={setPost} 
             />
-            <button className="btn btn-primary mt-14" onClick={sendPost}>Publish</button>
+            <button className="btn btn-primary mt-14" disabled={!userData?.isActive} onClick={sendPost}>Publish</button>
         </div>
     )
 }
