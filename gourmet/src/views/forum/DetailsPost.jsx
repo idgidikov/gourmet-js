@@ -171,7 +171,7 @@ function DetailsPost() {
                 {!state.showCommentForm && <div className="flex mt-6">
                     <div className="flex-grow"></div>
                     <div className="flex-none">
-                        <button className="btn btn-primary" onClick={toggleCommentForm}>
+                        <button className="btn btn-primary" disabled={!userData?.isActive} onClick={toggleCommentForm}>
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"

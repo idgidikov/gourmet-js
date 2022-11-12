@@ -24,7 +24,7 @@ const CreatePost = () => {
     const [postValidator, setPostValidator] = useState(false);
 
     const { user, addToast, userData } = useContext(AppContext)
-    const username = userData.username
+    const username = userData?.username
 
     const handleFileUpload = (e) => {
       setThumbnail(e.target?.files[0]);
@@ -96,7 +96,7 @@ const CreatePost = () => {
             value = {post}
             onChange={setPost} 
             />
-            <button className="btn btn-primary mt-14" onClick={sendPost}>Publish</button>
+            <button className="btn btn-primary mt-14" disabled={!userData?.isActive} onClick={sendPost}>Publish</button>
         </div>
     )
 }

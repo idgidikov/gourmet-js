@@ -1,10 +1,12 @@
 import React from "react"
 import CreatePost from "../../views/forum/CreatePost"
 import {Routes, Route, Link} from "react-router-dom"
-
+import { AppContext } from '../../context/app.context'
+import { useContext } from 'react'
 
 const MenuBlog = () => {
-
+    const { addToast, setAppState, ...appState } = useContext(AppContext)
+    const {userData}=appState
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -27,7 +29,7 @@ const MenuBlog = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-            <Link to="/create-blog-posts/"><p className="btn btn-primary">Create Post</p></Link>
+            <Link to="/create-blog-posts/"><p className="btn btn-primary" disabled={!userData?.isActive} >Create Post</p></Link>
             </div>
         </div>
     )
