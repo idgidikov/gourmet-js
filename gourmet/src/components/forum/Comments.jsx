@@ -1,7 +1,7 @@
 export default function Comment( comment ) {
-    //console.log(comment.comment)
     const timestamp = comment.comment.createdOn
     const date = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp)
+    
     return (
         <div className="card bg-base-100 shadow-xl mb-4">
             <div className="card-body">

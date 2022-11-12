@@ -5,11 +5,10 @@ import { useContext } from 'react'
 import { AppContext } from '../../context/app.context'
 
 function UserPostRows(post) {
-    const timestamp = post.post.addedOn
+    const timestamp = post?.post.addedOn
     const date = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp)
     const { addToast, userData } = useContext(AppContext)
     const navigate = useNavigate()
-    console.log(post.post)
     const showPostDetails = () => {
       navigate(`/blog-post/${post.post.id}`)
     }
@@ -29,20 +28,19 @@ function UserPostRows(post) {
 
     }
     return (
-      <div>
           <tr>
               <td>
               <div className="flex items-center space-x-3">
                   <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
-                      <img src={post.post.url} alt="Avatar Tailwind CSS Component" />
+                      <img src={post?.post.url} alt="Avatar Tailwind CSS Component" />
                   </div>
                   </div>
                   
               </div>
               </td>
               <td>
-              {post.post.title}
+              {post?.post.title}
               <br/>
               <span className="badge badge-ghost badge-sm">{date}</span>
               </td>
@@ -56,7 +54,6 @@ function UserPostRows(post) {
               <button className="btn btn-error btn-xs" onClick={removePost}>Remove</button>
               </th>
           </tr>
-      </div>
     )
 }
 
