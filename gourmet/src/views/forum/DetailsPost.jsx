@@ -6,9 +6,7 @@ import { useContext } from 'react'
 import { AppContext } from '../../context/app.context'
 import { getPostById } from '../../services/post.services'
 import Comment from '../../components/forum/Comments'
-import { useNavigate } from 'react-router-dom'
-import { deletePost, togglePostLikes } from '../../services/post.services'
-
+import { togglePostLikes } from '../../services/post.services'
 import { addComment, getCommentById } from '../../services/comments.services'
 
 
@@ -31,27 +29,6 @@ function DetailsPost() {
         id: '',
 
     })
-
-    const navigate = useNavigate()
-
-    const showPostDetails = () => {
-        navigate(`/blog-post/edit/${postId}`)
-    }
-
-    const successDelete = () => {
-        navigate(`/blog-post/removed`)
-    }
-
-    const removePost = async () => {
-        try {
-            await deletePost(postId, userData.username)
-            successDelete()
-        } catch (error) {
-            error => addToast('error', error.message)
-        }
-
-    }
-
 
 
     useEffect(() => {
@@ -183,11 +160,8 @@ function DetailsPost() {
                 <div className="card-body">
                     <p dangerouslySetInnerHTML={{ __html: state.post }}></p>
                     <div className="card-actions justify-end">
-                        <button className="btn btn-primary">Comment</button>
-                        <button className="btn btn-primary" onClick={removePost}>Delete</button>
-                        <button className="btn btn-primary" onClick={showPostDetails}>Edit</button>
                         {/* <button className="btn btn-primary" onClick={like}>Like {likes}</button> */}
-                        <button className="btn btn-primary" onClick={toggleLike}>{userData?.likedPostsIds?.includes(state?.id) ? 'Remove like' : 'Like'} : {Object.keys(state?.likedBy || {}).length} </button>
+                        <button className="btn btn-primary" onClick={toggleLike}>{userData?.likedPostsIds?.includes(state?.id) ? ' Unlike' : 'Like'} : {Object.keys(state?.likedBy || {}).length} </button>
 
 
 

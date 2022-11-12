@@ -173,6 +173,7 @@ function ProfileEdit() {
 
 
     return (<>
+        <div className="card w-96 bg-base-100 shadow-xl">
         <div><h2>Edit Profile</h2></div>
         <br />
         <form action="/profile">
@@ -208,7 +209,7 @@ function ProfileEdit() {
         <button className="btn btn-primary" onClick={editProfileEmail}>
             Update Email
         </button>
-
+        </div>
     </>
 
 

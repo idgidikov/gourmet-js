@@ -21,9 +21,21 @@ export const createPost = async({title, post, url, username}) => {
     })
 }
 
+export const updatePost = async({postId, title, post, url, username}) => {
+  const body = {
+    title,
+    post,
+    url,
+    author: username,
+    addedOn: Date.now(),
+  }
+
+  await update(ref(db, `posts/${postId}`), body)
+
+}
+
 export const getAllPosts = async () => {
     const snapshot = await get(ref(db, 'posts'))
-
     if (!snapshot.exists()) {
       return []
     }
@@ -49,27 +61,7 @@ export const getPostById = async (id) => {
     }
 }
 
-// export const getMoviesByName = async (name) => {
-//   const response = await fetch(`${API}/movies?name=${name}`)
 
-//   if (!response.ok) throw new Error('Something went wrong!')
-
-//   return response.json()
-// }
-
-// export const addMovieComment = async (movieId, content) => {
-//   const response = await fetch(`${API}/movies/${movieId}/comments`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//     body: JSON.stringify({ content }),
-//   })
-
-//   if (!response.ok) throw new Error('Something went wrong!')
-
-//   return response.json()
-// }
 
 export const deletePost = async (id, username) => {
   const snapshot = await get(ref(db, `posts/${id}`))
@@ -81,8 +73,6 @@ export const deletePost = async (id, username) => {
     ///[`comments/${username}/posts/${id}`] : null,
   })
   
-  
-
 }
 
 
@@ -92,19 +82,7 @@ export const togglePostLikes = async (postId, author, like = true) => {
     [`posts/${postId}/likedBy/${author}`]: like || null,
   })
 }
-// export const likePost =  (id, username) => {
-//   const updateLike = {}
-//   updateLike[`posts/${id}/likesBy/${username}`] = true
-//   updateLike[`users/${username}/likesPosts/${id}`] = true
-//   return update(ref(db), updateLike)
-// }
 
-// export const unlikePost =  (id, username) => {
-//   const updateLike = {}
-//   updateLike[`posts/${id}/likesBy/${username}`] = null
-//   updateLike[`users/${username}/likesPosts/${id}`] = null
-//   return update(ref(db), updateLike)
-// }
 
 export const getPostsByName = async (title) => {
   const snapshot = await get(ref(db, 'posts'))

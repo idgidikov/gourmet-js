@@ -8,7 +8,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import { AppContext } from '../../context/app.context'
 import { getPostById } from '../../services/post.services'
-import { createPost } from '../../services/post.services'
+import { updatePost } from '../../services/post.services'
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { storage } from '../../firebase/config.js'
 import { v4 } from 'uuid'
@@ -88,7 +88,7 @@ const EditPost = () => {
           const url = await getDownloadURL(result.ref)
           setThumbnail(url)
 
-          await createPost({title, post, url, username})
+          await updatePost({postId, title, post, url, username})
           showAllPosts()
         } catch (error) {
           addToast('error', error.message)

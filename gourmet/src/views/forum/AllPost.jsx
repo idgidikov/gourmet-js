@@ -16,7 +16,6 @@ const AllPosts = () => {
             setPosts(res)
         }).catch(e => addToast('error', e.message))
     }, [])
-
     return (
         <div className="AllPost">
             <MenuBlog />
