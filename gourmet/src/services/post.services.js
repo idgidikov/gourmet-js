@@ -1,9 +1,7 @@
 import { ref, push, get, set, update, remove, query, equalTo, orderByChild, orderByKey } from 'firebase/database'
 import { db, storage } from '../firebase/config'
-import { doc, deleteDoc } from "firebase/firestore";
-import { uploadBytesResumable } from 'firebase/storage'
 
-import { API } from '../common/constants'
+
 
 export const createPost = async({title, post, url, username}) => {
     const body = {
@@ -93,6 +91,6 @@ export const getPostsByName = async (title) => {
   return Object
     .keys(snapshot.val())
     .map(key => (({...snapshot.val()[key], id: key})))
-    .filter(post => post?.title.toLowerCase().includes(title.toLowerCase()))
+    .filter(post => post?.title?.toLowerCase().includes(title?.toLowerCase()))
     
 }

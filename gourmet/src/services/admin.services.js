@@ -1,13 +1,15 @@
 import { ref, push, get, set, update, query, equalTo, orderByChild, orderByKey } from 'firebase/database'
 import { db } from '../firebase/config'
-import { userRole } from '../common/enums/user-role.enum'
 
 
 export const allUsers = async () => {
     const snapshot = await get(ref(db, `users`))
-    console.log(snapshot.val())
-
-    return snapshot.val()
+    if(!snapshot.exists()){
+        return []
+    }
+    return Object
+    .keys(snapshot.val())
+    .map(key => ({...snapshot.val()[key], id: key}))
 }
 
 export const deactivateUserById = async (uid) => {

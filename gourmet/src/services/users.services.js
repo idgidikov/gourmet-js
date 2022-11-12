@@ -1,7 +1,6 @@
 import { ref, push, get, set, update, query, equalTo, orderByChild, orderByKey } from 'firebase/database'
 import { db } from '../firebase/config'
 import { userRole } from '../common/enums/user-role.enum'
-//import getPostById from './post.services'
 
 
 export const getUser = async (username) => {
