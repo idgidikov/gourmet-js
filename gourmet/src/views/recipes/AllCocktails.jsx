@@ -7,6 +7,8 @@ import { API_KEYS } from "../../common/constants.js"
 const AllCocktails = () => {
   const [cocktail, setCocktail] = useState([]);
 
+
+ 
   useEffect(() => {
     getData(API_KEYS.cocktail).then(result => setCocktail(result.drinks));
   }, [])

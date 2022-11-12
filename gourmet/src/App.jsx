@@ -24,6 +24,7 @@ import Authenticated from './hoc/Authenticated'
 import EditPost from './views/forum/EditPost'
 import RemovePost from './views/forum/RemovePost'
 import { useLocation,useNavigate } from 'react-router-dom'
+import SearchPosts from './views/forum/SearchPosts'
 
 
 
@@ -96,7 +97,8 @@ function App() {
           <Route path="/logout" element={<Authenticated user={appState.user}><Logout /></Authenticated>} />
           <Route path="/profile" element={<Authenticated user={appState.user}><Profile /></Authenticated>} />
           <Route path="/edit-profile" element={<Authenticated user={appState.user}><ProfileEdit /></Authenticated>} />
-        
+          <Route path="/search-posts" element={<Authenticated user={appState.user}><SearchPosts /></Authenticated>} />
+
           <Route path="/*" element={<NotFound />} />
         </Routes>
         <div className="toast">

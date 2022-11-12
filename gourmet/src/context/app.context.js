@@ -5,4 +5,5 @@ export const AppContext = createContext({
   setAppState() {},
   user: null,
   userData: null,
+  searchData:null,
 })

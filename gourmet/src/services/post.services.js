@@ -105,3 +105,16 @@ export const togglePostLikes = async (postId, author, like = true) => {
 //   updateLike[`users/${username}/likesPosts/${id}`] = null
 //   return update(ref(db), updateLike)
 // }
+
+export const getPostsByName = async (title) => {
+  const snapshot = await get(ref(db, 'posts'))
+  // console.log(snapshot.val())
+   //console.log(Object.keys(snapshot.val()))
+  if (!snapshot.exists()) throw new Error('Something went wrong.')
+  
+  return Object
+    .keys(snapshot.val())
+    .map(key => (({...snapshot.val()[key], id: key})))
+    .filter(post => post?.title.toLowerCase().includes(title.toLowerCase()))
+    
+}
