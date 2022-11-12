@@ -59,7 +59,7 @@ function DetailsPost() {
             })
 
             .catch(e => addToast('error', e.message))
-    }, [postId]);
+    }, [postId && postId]);
 
 
     const toggleLike = async () => {

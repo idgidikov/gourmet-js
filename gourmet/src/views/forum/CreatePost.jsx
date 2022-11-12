@@ -24,7 +24,7 @@ const CreatePost = () => {
     const [postValidator, setPostValidator] = useState(false);
 
     const { user, addToast, userData } = useContext(AppContext)
-    const username = userData.username
+    const username = userData?.username
 
     const handleFileUpload = (e) => {
       setThumbnail(e.target?.files[0]);

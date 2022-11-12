@@ -19,6 +19,8 @@ export const deactivateUserById = async (uid) => {
       const key = Object.keys(value)[0]
       return value[key]
     }
+    
+
     return update(ref(db), {
         [`users/${username}/isActive`] : false,
       })
