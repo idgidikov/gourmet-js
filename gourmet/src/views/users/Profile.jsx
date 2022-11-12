@@ -11,28 +11,32 @@ import UserPostRows from '../../components/users/UserPostRows'
 
 function Profile() {
     const { addToast, setAppState, user, userData } = useContext(AppContext)
-    const {email, firstName, lastName, username} = userData
+   
     const [posts, setPosts] = useState([])
 
     
 
-    useEffect(() => {
-        getUserPosts(username)
-            .then((post) => {
-                setPosts(post)
-            })
-            .catch((error) => {console.log(error), addToast('error', error.message)})
-    }, [username])
+    
+    const postByUser = async() =>{
+        try{
+            const post = await getUserPosts(userData?.username)
+            setPosts(post)
+        }catch(error){
+            console.log(error)
+            addToast('error', error.message)
+        }
+    }
+
 
     return (<>
         <div className="card card-side bg-base-100 shadow-xl">
             <figure><img className='w-72' src={userData ? userData.profile : 'https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg'} alt="Movie" /></figure>
             <div className="card-body">
-                <h2 className="card-title"> Hello {username}
+                <h2 className="card-title"> Hello {userData?.username}
                 </h2>
-                <p ><span className="badge badge-accent">Email:</span>  {email}</p>
-                <p><span className="badge badge-accent">First name:</span>  {firstName}</p>
-                <p><span className="badge badge-accent">Last name:</span>  {lastName}</p>
+                <p ><span className="badge badge-accent">Email:</span>  {userData?.email}</p>
+                <p><span className="badge badge-accent">First name:</span>  {userData?.firstName}</p>
+                <p><span className="badge badge-accent">Last name:</span>  {userData?.lastName}</p>
                 
                 {/* <p>{email}</p> */}
                 <div className="card-actions justify-end">

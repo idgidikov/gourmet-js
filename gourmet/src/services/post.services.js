@@ -93,6 +93,6 @@ export const getPostsByName = async (title) => {
   return Object
     .keys(snapshot.val())
     .map(key => (({...snapshot.val()[key], id: key})))
-    .filter(post => post?.title.toLowerCase().includes(title.toLowerCase()))
+    .filter(post => post?.title?.toLowerCase().includes(title?.toLowerCase()))
     
 }
