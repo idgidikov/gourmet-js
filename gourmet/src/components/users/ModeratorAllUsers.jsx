@@ -1,33 +1,40 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { deletePost } from '../../services/post.services'
-import { useContext } from 'react'
 import { AppContext } from '../../context/app.context'
+import { useContext } from 'react'
+import { deactivateUserById } from '../../services/admin.services'
+import { useState, useEffect } from 'react'
 
 function ModeratorAllUsers(post) {
-    console.log(post.user)
+    const { addToast } = useContext(AppContext)
     const timestamp = post?.registeredOn
     const date = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp)
-    const { addToast, userData } = useContext(AppContext)
-    const navigate = useNavigate()
-    // const showPostDetails = () => {
-    //   navigate(`/blog-post/${post.post.id}`)
-    // }
+    const [buttonActiveText, setButtonActiveText] = useState('')
+    
+    const blockUserById = async () => {
+        deactivateUserById(post?.user.uid)
+            .then((result) => {
+                console.log(result.isActive)
+                if(result?.isActive == true) {
+                    setButtonActiveText('Block')
+                    addToast('success', 'Successfully Blocked')
+                } else if(result?.isActive == false) {
+                    setButtonActiveText('Unblock')
+                    addToast('success', 'Successfully Unblocked')
+                }
+                
+            })
+            .catch((error) => addToast('error', error.message))
+    }
+    
+    useEffect(() => {
+        if(post?.user.isActive == true) {
+            setButtonActiveText('Block')
+        }
+        if(post?.user.isActive == false) {
+            setButtonActiveText('Unblock')
+        }
+    }, [])
 
-    // const showPostEdit = () => {
-    //   navigate(`/blog-post/edit/${post.post.id}`)
-    // }
-
-
-    // const removePost = async () => {
-    //   try {
-    //       await deletePost(post.post.id, userData.username)
-    //       addToast('success', "Post has been deleted successfully")
-    //   } catch (error) {
-    //       error => addToast('error', error.message)
-    //   }
-
-    // }
     return (
           <tr>
               <td>
@@ -41,17 +48,24 @@ function ModeratorAllUsers(post) {
               </div>
               </td>
               <td>
-              {post?.user.firstName}
+                {post?.user.firstName} {post?.user.lastName}
               <br/>
               <span className="badge badge-ghost badge-sm">register on:{date}</span>
               </td>
+              <td>
+                {post?.user.username}
+              </td>
+              <td>
+                {post?.user.email}
+              </td>
 
               <th>
-              <button className="btn btn-warning btn-xs" >Block</button>
+              <button className="btn btn-warning btn-xs" onClick={blockUserById}>
+                {/* {post?.user.isActive ? 'Block' : 'Unblock'} */}
+                {buttonActiveText}
+              </button>
               </th>
-              <th>
-              <button className="btn btn-error btn-xs" >Remove</button>
-              </th>
+
           </tr>
     )
 }

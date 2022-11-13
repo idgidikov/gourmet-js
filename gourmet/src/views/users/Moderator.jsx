@@ -3,13 +3,16 @@ import { useState, useEffect } from 'react'
 import { AppContext } from '../../context/app.context'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom';
-import { allUsers } from '../../services/admin.services'
+import { allUsers, deactivateUserById } from '../../services/admin.services'
 import ModeratorAllUsers from '../../components/users/ModeratorAllUsers'
-
+import UserPostRows from '../../components/users/UserPostRows'
+import { getAllPosts } from '../../services/post.services'
 
 function Moderator() {
     const { addToast, setAppState, user, userData } = useContext(AppContext)
     const [users, setUsers] = useState([])
+    const [posts, setPosts] = useState([])
+    const [content, setContent] = useState(true)
 
 
     useEffect(() => {
@@ -18,9 +21,18 @@ function Moderator() {
                 setUsers(u)
             })
             .catch((error) => { addToast('error', error.message)})
+
+        getAllPosts()
+            .then((p) => {
+                setPosts(p)
+            })
     }, [userData?.username])
 
-    console.log(users)
+    const showContent = () => {
+        setContent(!content)
+    }
+    
+
     return (<>
         <div className="card card-side bg-base-100 shadow-xl">
             <figure><img className='w-72' src={userData ? userData.profile : 'https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg'} alt="Movie" /></figure>
@@ -39,14 +51,17 @@ function Moderator() {
         <div className="overflow-x-auto w-full">
             <table className="table w-full">
                 <thead>
-                    <tr>
-                        
-                        <th>All users</th>
-                        
+                    <tr>   
+                    <th>
+                        <button className="btn btn-success btn-xs" disabled={content} onClick={showContent}>All Users</button>
+                    </th>     
+                    <th>
+                        <button className="btn btn-success btn-xs" disabled={!content} onClick={showContent}>All Posts</button>
+                    </th>     
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => <ModeratorAllUsers key={user.uid} user={user} />)}
+                    {content ? users.map(user => <ModeratorAllUsers key={user.uid} user={user} />) : posts.map(post => <UserPostRows key={post.id} post={post} />)}
                 </tbody>
                 <tfoot>
                 <tr>

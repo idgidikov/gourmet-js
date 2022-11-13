@@ -41,12 +41,6 @@ export const getAllPosts = async () => {
     return Object
       .keys(snapshot.val())
       .map(key => ({...snapshot.val()[key], id: key}))
-
-  // const response = await fetch(`${API}/movies`)
-
-  // if (!response.ok) throw new Error('Something went wrong!')
-
-  // return response.json()
 }
 
 export const getPostById = async (id) => {
@@ -84,8 +78,6 @@ export const togglePostLikes = async (postId, author, like = true) => {
 
 export const getPostsByName = async (title) => {
   const snapshot = await get(ref(db, 'posts'))
-  // console.log(snapshot.val())
-   //console.log(Object.keys(snapshot.val()))
   if (!snapshot.exists()) throw new Error('Something went wrong.')
   
   return Object
@@ -94,3 +86,4 @@ export const getPostsByName = async (title) => {
     .filter(post => post?.title?.toLowerCase().includes(title?.toLowerCase()))
     
 }
+
