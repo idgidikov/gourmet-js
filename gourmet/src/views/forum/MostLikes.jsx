@@ -1,4 +1,4 @@
-import React from "react"
+import React from 'react'
 import MenuBlog from "../../components/forum/MenuBlog"
 import { getAllPosts } from '../../services/post.services'
 import { useState } from 'react'
@@ -7,7 +7,7 @@ import { useContext } from 'react'
 import { AppContext } from '../../context/app.context'
 import PostsCard from '../../components/forum/PostCard'
 
-const ByDatePosts = () => {
+const MostLikes = () => {
     const [posts, setPosts] = useState([])
     const { addToast } = useContext(AppContext)
 
@@ -19,10 +19,11 @@ const ByDatePosts = () => {
     return (
         <div className="AllPost">
             <MenuBlog />
-            <h1>Last Added by Date</h1>
+            <h1>Most Liked Posts</h1>
            
             <div className="flex flex-wrap justify-around">
-                {posts.map(p => <PostsCard key={p.id} post={p} />).reverse()}
+                {posts.filter(   p => p.likedBy )
+                    .map(p => <PostsCard key={p.id} post={p} />)}
             </div>
             
         </div>
@@ -30,4 +31,4 @@ const ByDatePosts = () => {
 
 }
 
-export default ByDatePosts
+export default MostLikes

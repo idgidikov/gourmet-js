@@ -30,7 +30,7 @@ export const createUser = async (uid, username,email,firstName,lastName, role = 
 
   await set(ref(db, `users/${username}`), userData)
 
-  return {...userData, commentIds: [], movieIds: [], likedMoviesIds: [] }
+  return {...userData, commentIds: [], postIds: [], likedPostIds: [] }
 }
 
 export const getUserPosts = async (username) => {
