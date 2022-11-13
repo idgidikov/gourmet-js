@@ -1,12 +1,12 @@
 import React from "react"
 import CreatePost from "../../views/forum/CreatePost"
-import {Routes, Route, Link} from "react-router-dom"
+import { Routes, Route, Link } from "react-router-dom"
 import { AppContext } from '../../context/app.context'
 import { useContext } from 'react'
 
 const MenuBlog = () => {
     const { addToast, setAppState, ...appState } = useContext(AppContext)
-    const {userData}=appState
+    const { userData } = appState
     return (
         <div className="navbar bg-base-100">
             <div className="navbar-start">
@@ -15,11 +15,11 @@ const MenuBlog = () => {
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                     </label>
                     <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                    <Link to='/blog-posts/last-added' className="btn">lastAdded</Link>
-                    <Link to='/blog-posts/most-commented' className="btn">Most Commented</Link>
-                    <Link to='/blog-posts/most-liked' className="btn">Most Liked</Link>
-                    
-                    
+                        <Link to='/blog-posts/last-added' className="btn">lastAdded</Link>
+                        <Link to='/blog-posts/most-commented' className="btn">Most Commented</Link>
+                        <Link to='/blog-posts/most-liked' className="btn">Most Liked</Link>
+
+
                     </ul>
                 </div>
             </div>
@@ -31,7 +31,7 @@ const MenuBlog = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-            <Link to="/create-blog-posts/"><p className="btn btn-primary" disabled={!userData?.isActive} >Create Post</p></Link>
+                <Link to="/create-blog-posts/"><p className="btn btn-primary" disabled={!userData?.isActive} >Create Post</p></Link>
             </div>
         </div>
     )
