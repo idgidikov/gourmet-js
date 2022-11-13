@@ -12,7 +12,6 @@ import { getPostsByName } from '../../services/post.services'
 function SearchPosts() {
     const { addToast, setAppState, user, userData, searchData } = useContext(AppContext)
     const [posts, setPosts] = useState([])
-    console.log(searchData)
     useEffect(() => {
         if (searchData=== '') return setPosts([])
     

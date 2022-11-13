@@ -2,18 +2,35 @@ import React from "react"
 import { useEffect, useState} from 'react'
 import { userCount, postCount } from '../services/home.services'
 import NumbersShuffle from '../react-spring/NumbersShuffle'
+import { useNavigate } from 'react-router-dom'
+
+
 
 const Home = () => {
     const [users, setUsers] = useState(0)
     const [posts, setPosts] = useState(0)
+
+    const navigate = useNavigate()
+
+    const showAllPosts = () => {
+      navigate(`/blog-posts/`)
+    }
+    // const showAllUsers = () => {
+    //   navigate(`/blog-posts/`)
+    // }
+    const showAllCocktails = () => {
+      navigate(`/cocktails/`)
+    }
+    const showAllMeals = () => {
+      navigate(`/meals/`)
+    }
 
     useEffect(() => {
         userCount().then(res => setUsers(res))
         postCount().then(res => setPosts(res))
     }, [])
 
-    console.log(users)
-    console.log(posts)
+
     return (
         <div className="Home">
             <div className="header">
@@ -27,7 +44,7 @@ const Home = () => {
                         <h2 className="card-title-statistics"><NumbersShuffle n={100} /></h2>
                         <p className="card-paragraph-statistics">Cocktails</p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">View</button>
+                            <button className="btn btn-primary" onClick={showAllCocktails}>View</button>
                         </div>
                     </div>
                 </div>
@@ -36,7 +53,7 @@ const Home = () => {
                         <h2 className="card-title-statistics"><NumbersShuffle n={100} /></h2>
                         <p className="card-paragraph-statistics">Meals</p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">View</button>
+                            <button className="btn btn-primary" onClick={showAllMeals}>View</button>
                         </div>
                     </div>
                 </div>
@@ -45,7 +62,7 @@ const Home = () => {
                         <h2 className="card-title-statistics"><NumbersShuffle n={posts} /></h2>
                         <p className="card-paragraph-statistics">Posts</p>
                         <div className="card-actions justify-end">
-                            <button className="btn btn-primary">View</button>
+                            <button className="btn btn-primary" onClick={showAllPosts}>View</button>
                         </div>
                     </div>
                 </div>

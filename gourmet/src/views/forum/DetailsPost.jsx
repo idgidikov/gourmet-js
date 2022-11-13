@@ -8,20 +8,19 @@ import { getPostById } from '../../services/post.services'
 import Comment from '../../components/forum/Comments'
 import { togglePostLikes } from '../../services/post.services'
 import { addComment, getCommentById } from '../../services/comments.services'
-
+import { defaultPicture } from '../../common/constants';
 
 
 
 
 function DetailsPost() {
+
     const { postId } = useParams()
     const { addToast,setAppState, userData, user } = useContext(AppContext)
     const [state, setState] = useState({
         postObject: null,
         comments: [],
-        //new
         showCommentForm: false,
-        //new
         commentText: '',
         post: '',
         title: '',
@@ -30,32 +29,25 @@ function DetailsPost() {
 
     })
 
-
     useEffect(() => {
         getPostById(postId)
             .then(p => {
-
-
                 setState(state => ({
                     ...state,
-                    //postObject,
                     post: p.post,
                     title: p.title,
                     url: p.url,
                     id: postId,
-
-                    //new
                     comments: [],
 
                 }))
-                //new
                 const ids = Object.keys(p.comments)
+
                 return Promise.all(ids.map(getCommentById))
                     .then(comments => setState(state => ({
                         ...state,
                         comments
                     })))
-                //end new
             })
 
             .catch(e => addToast('error', e.message))
@@ -101,17 +93,12 @@ function DetailsPost() {
                         }
                     })
                 }
-
-
                 if (!state.likedBy) {
                     state.likedBy = {}
                 }
-
-                state.likedBy[userData.username] = true
+                state.likedBy[userData?.username] = true
                 setState({
                     ...state,
-
-
                 })
             }
         } catch (error) {
@@ -154,7 +141,7 @@ function DetailsPost() {
                 </div>
             </div>
             <p className="user-name">Author: {userData?.firstName}</p>
-            <figure><img className="blog-detail-thumbnail" src={state.url} alt="Album" /></figure>
+            <figure><img className="blog-detail-thumbnail" src={state.url ? state.url : defaultPicture} alt="Album" /></figure>
             <h1 className="text-2xl text-center font-bold pt-8 mb-20" dangerouslySetInnerHTML={{ __html: state.title }}></h1>
             <div className="card lg:card-side bg-base-100 shadow-xl">
                 <div className="card-body">

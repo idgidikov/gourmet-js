@@ -4,8 +4,8 @@ import { AppContext } from '../../context/app.context'
 import UserValid from '../../common/enums/user-validation'
 import { useContext } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import {createUser, getUser} from '../../services/users.services'
-import{registerUser,loginUser} from '../../services/auth.services'
+import { createUser, getUser } from '../../services/users.services'
+import { registerUser, loginUser } from '../../services/auth.services'
 
 
 
@@ -81,7 +81,7 @@ function Signup() {
         })
     }
     const updatePassword = (value = '') => {
-        
+
 
         setForm({
             ...form,
@@ -102,7 +102,7 @@ function Signup() {
             confirmPassword: {
                 value,
                 touched: true,
-                valid: value.length >= UserValid.PASS_MIN_LENGTH && value.length <=  value.length <= UserValid.PASS_MAX_LENGTH && value === form.password.value,
+                valid: value.length >= UserValid.PASS_MIN_LENGTH && value.length <= value.length <= UserValid.PASS_MAX_LENGTH && value === form.password.value,
                 error: value.length < UserValid.PASS_MIN_LENGTH ? `Minimum password length: ${UserValid.PASS_MIN_LENGTH}` : `Maximum password length: ${UserValid.PASS_MAX_LENGTH}`
             },
         })
@@ -113,8 +113,8 @@ function Signup() {
             name: {
                 value,
                 touched: true,
-                valid: value.length >=UserValid.FIRST_NAME_MIN_LENGTH   && value.length <= UserValid.FIRST_NAME_MAX_LENGTH,
-                error: value.length < UserValid.FIRST_NAME_MIN_LENGTH  ? `Minimum name length:${ UserValid.FIRST_NAME_MIN_LENGTH} ` : `Maximum name length:${ UserValid.FIRST_NAME_MAX_LENGTH} `
+                valid: value.length >= UserValid.FIRST_NAME_MIN_LENGTH && value.length <= UserValid.FIRST_NAME_MAX_LENGTH,
+                error: value.length < UserValid.FIRST_NAME_MIN_LENGTH ? `Minimum name length:${UserValid.FIRST_NAME_MIN_LENGTH} ` : `Maximum name length:${UserValid.FIRST_NAME_MAX_LENGTH} `
             }
         })
     }
@@ -126,7 +126,7 @@ function Signup() {
                 value,
                 touched: true,
                 valid: value.length >= UserValid.LAST_NAME_MIN_LENGTH && value.length <= UserValid.LAST_NAME_MAX_LENGTH,
-                error: value.length < UserValid.LAST_NAME_MIN_LENGTH  ? `Minimum  last name length:${ UserValid.FIRST_LAST_NAME_MIN_LENGTH} ` : `Maximum last name length:${ UserValid.FIRST_LAST_NAME_MAX_LENGTH} `
+                error: value.length < UserValid.LAST_NAME_MIN_LENGTH ? `Minimum  last name length:${UserValid.FIRST_LAST_NAME_MIN_LENGTH} ` : `Maximum last name length:${UserValid.FIRST_LAST_NAME_MAX_LENGTH} `
             }
         })
     }
@@ -134,177 +134,175 @@ function Signup() {
     const register = async (e) => {
         e.preventDefault()
 
-    if (!form.username.valid) return addToast('error', 'Invalid email')
-    if (!form.email.valid) return addToast('error', 'Invalid email')
-    if (!form.password.valid) return addToast('error', 'Invalid password')
-    if (!form.confirmPassword.valid) return addToast('error', 'Password does not match')
-    if (!form.name.valid) return addToast('error', 'Invalid name')
-    if (!form.last.valid) return addToast('error', 'Invalid last name')
-    try {
-        const user = await getUser(form.username.value)
-
-        if (user !== null) return addToast('error', `User with username ${form.username.value} already exists!`)
-
-        const credentials = await registerUser(form.email.value, form.password.value)
-
+        if (!form.username.valid) return addToast('error', 'Invalid email')
+        if (!form.email.valid) return addToast('error', 'Invalid email')
+        if (!form.password.valid) return addToast('error', 'Invalid password')
+        if (!form.confirmPassword.valid) return addToast('error', 'Password does not match')
+        if (!form.name.valid) return addToast('error', 'Invalid name')
+        if (!form.last.valid) return addToast('error', 'Invalid last name')
         try {
-          const userData = await createUser(credentials.user.uid, form.username.value,form.email.value,form.name.value,form.last.value)
+            const user = await getUser(form.username.value)
 
-          setAppState({
-            ...appState,
-            userData,
-          })
-        } catch (e) {
-          return addToast('error', e.message)
-        }
+            if (user !== null) return addToast('error', `User with username ${form.username.value} already exists!`)
 
-        try {
-          const credentials = await loginUser(form.email.value, form.password.value)
+            const credentials = await registerUser(form.email.value, form.password.value)
 
-          setAppState({
-            ...appState,
-            user: {
-              email: credentials.user.email,
-              uid: credentials.user.uid,
+            try {
+                const userData = await createUser(credentials.user.uid, form.username.value, form.email.value, form.name.value, form.last.value)
+
+                setAppState({
+                    ...appState,
+                    userData,
+                })
+            } catch (e) {
+                return addToast('error', e.message)
             }
-          })
 
-          addToast('success', 'You have been logged!')
+            try {
+                const credentials = await loginUser(form.email.value, form.password.value)
 
-          navigate('/')
+                setAppState({
+                    ...appState,
+                    user: {
+                        email: credentials.user.email,
+                        uid: credentials.user.uid,
+                    }
+                })
+
+                addToast('success', 'You have been logged!')
+
+                navigate('/')
+            } catch (error) {
+                addToast('error', 'Something went wrong')
+                console.log(error)
+            }
         } catch (error) {
-          addToast('error', 'Something went wrong')
-          console.log(error)
-        }
-      } catch (error) {
-        if (error.message.includes('auth/email-already-in-use')) {
-          return addToast('error', 'This email has already been registered!')
+            if (error.message.includes('auth/email-already-in-use')) {
+                return addToast('error', 'This email has already been registered!')
+            }
+
+            addToast('error', 'Something went wrong')
         }
 
-        addToast('error', 'Something went wrong')
-      }
-    
 
-    
-}
+
+    }
 
 
     return (
         <div className=''>
-            <div className="container py-12 px-6 h-full ">
-                <div className="flex justify-center items-center flex-wrap h-full g-6 text-gray-800">
-                    <div className="xl:w-10/12">
-                        <div className="block bg-primary shadow-lg rounded-lg">
-                            <div className="lg:flex lg:flex-wrap g-0">
-                                <div className="lg:w-6/12 px-4 md:px-0">
-                                    <div className="md:p-12 md:mx-6">
-                                        <div className="text-center">
-                                            <img
-                                                className="mx-auto w-48"
-                                                src=''
-                                                alt="logo"
-                                            />
-                                            <h4 className="text-xl font-semibold mt-1 mb-12 pb-1">We are The Gourmet Team</h4>
-                                        </div>
-                                        <form >
-                                            <p className="mb-4">Please login to your account</p>
-                                            <div className="mb-4">
-                                                <input
-                                                    value={form.username.value}
-                                                    onChange={e => updateUsername(e.target.value)}
-                                                    type="text"
-                                                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                                    id="username"
-                                                    placeholder="Username"
-                                                />
-                                            </div>
-                                            <div className="mb-4">
-                                                <input
-                                                    value={form.email.value}
-                                                    onChange={e => updateEmail(e.target.value)}
-                                                    type="email"
 
-                                                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                                    id="email"
-                                                    placeholder="Email"
-                                                />
-                                            </div>    <div className="mb-4">
-                                                <input
-                                                    value={form.name.value}
-                                                    onChange={e => UpdateName(e.target.value)}
-                                                    type="text"
-                                                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                                    id="name"
-                                                    placeholder="Name"
-                                                />
-                                            </div>
-                                            <div className="mb-4">
-                                                <input
-                                                    value={form.last.value}
-                                                    onChange={e => UpdateLastName(e.target.value)}
-                                                    type="text"
-                                                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                                    id="lastname"
-                                                    placeholder="Last Name"
-                                                />
-                                            </div>
-                                            <div className="mb-4">
-                                                <input
-                                                    value={form.password.value}
-                                                    onChange={e => updatePassword(e.target.value)}
-                                                    type="password"
-                                                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                                    id="password"
-                                                    placeholder="Password"
-                                                />
-                                            </div>
-                                            <div className="mb-4">
-                                                <input
-                                                    value={form.confirmPassword.value}
-                                                    onChange={e => confirmPassword(e.target.value)}
-                                                    type="password"
-                                                    className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                                                    id="passwordConfirm"
-                                                    placeholder="Repeat password"
-                                                />
-                                            </div>
-                                            <div className="text-center pt-1 mb-12 pb-1">
-                                                <button
-                                                    className="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
-                                                    type="submit"
-                                                    onClick={register}
-                                                    data-mdb-ripple="true"
-                                                    data-mdb-ripple-color="light"
-                                                >
-                                                    Register
-                                                </button>
-                                                <a className="text-gray-500" href="#!">Forgot password?</a>
-                                            </div>
-                                            <div className="flex items-center justify-between pb-6">
-                                                <p className="mb-0 mr-2">You have an account?</p>
-                                                <button
-                                                    type="button"
-                                                    className="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
-                                                    data-mdb-ripple="true"
-                                                    data-mdb-ripple-color="light"
-                                                >
-                                                    Log In
-                                                </button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                                <div
-                                    className="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
-                                >
-                                  
-                                </div>
-                            </div>
+        
+
+            <div className='grid grid-cols-1 sm:grid-cols-2 h-screen w-full'>
+                <div className='hidden sm:block'>
+                    <img className='w-full h-full object-cover' src="https://previews.123rf.com/images/nomadsoul1/nomadsoul11703/nomadsoul1170300030/73275570-barkeeper-show-behind-restaurant-bar-counter.jpg" alt="" />
+                </div>
+
+                <div className='bg-gray-500 flex flex-col justify-center'>
+                    <form className='max-w-[400px] w-full mx-auto bg-white-p-4' action="">
+                        <h2 className='text-4xl font-bold text-center py-6'>BRAND</h2>
+
+                        <p className="mb-4">Please login to your account</p>
+                        <div className="mb-4">
+                            <input
+                                value={form.username.value}
+                                onChange={e => updateUsername(e.target.value)}
+                                type="text"
+                                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="username"
+                                placeholder="Username"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <input
+                                value={form.email.value}
+                                onChange={e => updateEmail(e.target.value)}
+                                type="email"
+
+                                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="email"
+                                placeholder="Email"
+                            />
+                        </div>    <div className="mb-4">
+                            <input
+                                value={form.name.value}
+                                onChange={e => UpdateName(e.target.value)}
+                                type="text"
+                                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="name"
+                                placeholder="Name"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <input
+                                value={form.last.value}
+                                onChange={e => UpdateLastName(e.target.value)}
+                                type="text"
+                                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="lastname"
+                                placeholder="Last Name"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <input
+                                value={form.password.value}
+                                onChange={e => updatePassword(e.target.value)}
+                                type="password"
+                                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="password"
+                                placeholder="Password"
+                            />
+                        </div>
+                        <div className="mb-4">
+                            <input
+                                value={form.confirmPassword.value}
+                                onChange={e => confirmPassword(e.target.value)}
+                                type="password"
+                                className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                                id="passwordConfirm"
+                                placeholder="Repeat password"
+                            />
+                        </div>
+                        <div className="text-center pt-1 mb-12 pb-1">
+                            <button
+                                className="inline-block px-6 py-2.5 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:shadow-lg focus:outline-none focus:ring-0 active:shadow-lg transition duration-150 ease-in-out w-full mb-3"
+                                type="submit"
+                                onClick={register}
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                            >
+                                Register
+                            </button>
+                            <a className="text-gray-500" href="#!">Forgot password?</a>
+                        </div>
+                        <div className="flex items-center justify-between pb-6">
+                            <p className="mb-0 mr-2">You have an account?</p>
+                            <button
+                                type="button"
+                                className="inline-block px-6 py-2 border-2 border-red-600 text-red-600 font-medium text-xs leading-tight uppercase rounded hover:bg-black hover:bg-opacity-5 focus:outline-none focus:ring-0 transition duration-150 ease-in-out"
+                                data-mdb-ripple="true"
+                                data-mdb-ripple-color="light"
+                            >
+                                Log In
+                            </button>
+                        </div>
+                    </form>
+                    {/* </div>
+                                </div> */}
+                    <div
+                        className="lg:w-6/12 flex items-center lg:rounded-r-lg rounded-b-lg lg:rounded-bl-none"
+                    >
+
+                    </div>
+                    {/* </div>
                         </div>
                     </div>
                 </div>
+            </div> */}
             </div>
-        </div>
-    )
+            </div>
+                </div>
+                )
 }
-export default Signup
+                export default Signup

@@ -1,3 +1,5 @@
+import { defaultPicture } from '../../common/constants';
+
 export default function Comment( comment ) {
     const timestamp = comment.comment.createdOn
     const date = new Intl.DateTimeFormat('en-US', {year: 'numeric', month: '2-digit',day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}).format(timestamp)
@@ -8,7 +10,7 @@ export default function Comment( comment ) {
             <div className="avatar-group -space-x-6">
                 <div className="avatar mr-9">
                     <div className="w-12">
-                    <img src={comment.comment.profilePicture} />
+                    <img src={comment.comment?.profilePicture ? comment.comment?.profilePicture : defaultPicture} />
                     </div>
                 </div>
             <h2 className="card-title">{comment.comment.author}</h2>

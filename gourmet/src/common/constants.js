@@ -7,3 +7,5 @@ export const API_KEYS= {
 }
 
 export const API = `http://localhost:5173`
+
+export const defaultPicture = 'src/assets/default_picture.jpg'
