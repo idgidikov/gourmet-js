@@ -98,19 +98,19 @@ function Login() {
                     <div className='flex flex-col py-2'>
                         <label htmlFor="">Email</label>
                         <input
-
+                            //input input-bordered i w-full max-w-xs
                             value={form.email.value}
                             onChange={e => updateEmail(e.target.value)} 
-                            className='border p-2 bg-black' type="text" />
+                            className='border p-2 input input-primary ' type="text" />
                     </div>
                     <div className='flex flex-col py-2'>
                         <label htmlFor="">Password</label>
                         <input
                         value={form.password.value}
                         onChange={e => updatePassword(e.target.value)} 
-                         className='border p-2  bg-black' type="password" />
+                         className='border p-2 input input-primary' type="password" />
                     </div>
-                    <button onClick = {login} className='border w-full my-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white'>Sign in</button>
+                    <button onClick = {login} className=' input border w-full my-5 py-2 bg-indigo-600 hover:bg-indigo-500 text-white'>Sign in</button>
                     <div className='flex justify-between'>
                         <p className='flex items-center mr-2'><input className='mr-2' type="checkbox" />Remember me</p>
                         <Link to='/sign-up'>Create an account</Link>
