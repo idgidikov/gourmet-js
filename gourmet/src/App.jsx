@@ -59,7 +59,6 @@ function App() {
 
   useEffect(() => {
     if (appState.user !== null) {
-      console.log('fetching user from App.jsx')
       getUserById(appState.user.uid)
         .then(userData => setAppState({...appState, userData }) || console.log(userData))
         .catch(e => addToast('error', e.message))

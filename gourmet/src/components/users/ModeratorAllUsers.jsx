@@ -17,7 +17,8 @@ function ModeratorAllUsers(post) {
                 if(result?.isActive == true) {
                     setButtonActiveText('Block')
                     addToast('success', 'Successfully Blocked')
-                } else if(result?.isActive == false) {
+                }
+                if(result?.isActive == false) {
                     setButtonActiveText('Unblock')
                     addToast('success', 'Successfully Unblocked')
                 }

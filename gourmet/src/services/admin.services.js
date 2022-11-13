@@ -23,7 +23,6 @@ export const deactivateUserById = async (uid) => {
       } else if(value[key].isActive == false) {
         newStatus = true
       }
-      console.log(value[key])
       return (
         update(ref(db), {
         [`users/${value[key].username}/isActive`] : newStatus,

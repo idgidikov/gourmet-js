@@ -1,7 +1,7 @@
 import { ref, push, get, set, update, query, equalTo, orderByChild, orderByKey } from 'firebase/database'
 import { db } from '../firebase/config'
 
-export const addComment = async(author, postId, content, profilePicture) => {
+export const addComment = async(author, postId, content, profilePicture="") => {
   const comment = { author, postId, content, profilePicture, createdOn: Date.now() }
   const result = await push(ref(db, 'comments'), comment)
 
