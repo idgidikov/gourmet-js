@@ -26,6 +26,7 @@ import RemovePost from './views/forum/RemovePost'
 import { useLocation,useNavigate } from 'react-router-dom'
 import SearchPosts from './views/forum/SearchPosts'
 import Moderator from './views/users/Moderator'
+import UserRoleRender from './hoc/UserRole'
 
 
 
@@ -97,8 +98,9 @@ function App() {
           <Route path="/blog-post/removed" element={<Authenticated user={appState.user}><RemovePost /></Authenticated>} />
           <Route path="/blog-post/edit/:postId" element={<Authenticated user={appState.user}><EditPost /></Authenticated>} />
           <Route path="/logout" element={<Authenticated user={appState.user}><Logout /></Authenticated>} />
-          <Route path="/profile" element={<Authenticated user={appState.user}><Profile /></Authenticated>} />
-          <Route path="/moderator" element={<Authenticated user={appState.user}><Moderator /></Authenticated>} />
+          <Route path="/profile/" element={<Authenticated user={appState.user}><UserRoleRender /></Authenticated>} />
+          {/* <Route path="/profile" element={<Authenticated user={appState.user}><Profile /></Authenticated>} />
+          <Route path="/moderator" element={<Authenticated user={appState.user}><Moderator /></Authenticated>} /> */}
           <Route path="/edit-profile" element={<Authenticated user={appState.user}><ProfileEdit /></Authenticated>} />
           <Route path="/search-posts" element={<Authenticated user={appState.user}><SearchPosts /></Authenticated>} />
 

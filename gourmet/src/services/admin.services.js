@@ -17,12 +17,17 @@ export const deactivateUserById = async (uid) => {
     const value = snapshot.val()
     if(value!==null){
       const key = Object.keys(value)[0]
-      return value[key]
+      let newStatus = value[key].isActive
+      if(value[key].isActive == true){
+        newStatus = false
+      } else if(value[key].isActive == false) {
+        newStatus = true
+      }
+      console.log(value[key])
+      return (
+        update(ref(db), {
+        [`users/${value[key].username}/isActive`] : newStatus,
+      }), value[key])
     }
-    
-
-    return update(ref(db), {
-        [`users/${username}/isActive`] : false,
-      })
 }
 

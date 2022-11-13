@@ -22,11 +22,12 @@ function SearchPosts() {
     
         return () => clearTimeout(timer)
       }, [searchData])
-      //console.log(posts)
+
+
     return (
         <>
 
-            <div>SearchPosts</div>
+            <h1>SearchPosts</h1>
             <div className="flex flex-wrap justify-around">
         {posts?.map(m => <PostsCard key={m.id} post={m} />)}
         
