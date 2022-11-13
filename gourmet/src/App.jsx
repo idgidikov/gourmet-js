@@ -26,6 +26,7 @@ import RemovePost from './views/forum/RemovePost'
 import { useLocation,useNavigate } from 'react-router-dom'
 import SearchPosts from './views/forum/SearchPosts'
 import Moderator from './views/users/Moderator'
+import ByDatePosts from './views/forum/ByDatePosts'
 
 
 
@@ -92,7 +93,12 @@ function App() {
           <Route path="/meals" element={<AllMeals />} />
           <Route path="/meals/:id" element={ <MealDetails />} />
           <Route path="/blog-posts/" element={<AllPosts />} />
+          <Route path='/blog-posts/last-added' element={<ByDatePosts />} />
+          <Route path='/blog-posts/most-liked' element={<ByDatePosts />} />
+          <Route path='/blog-posts/most-commented' element={<ByDatePosts />} />
+
           <Route path="/create-blog-posts/" element={<Authenticated user={appState.user}><CreatePost /></Authenticated>}/>
+          
           <Route path="/blog-post/:postId" element={<Authenticated user={appState.user}><DetailsPost /></Authenticated>} />
           <Route path="/blog-post/removed" element={<Authenticated user={appState.user}><RemovePost /></Authenticated>} />
           <Route path="/blog-post/edit/:postId" element={<Authenticated user={appState.user}><EditPost /></Authenticated>} />
