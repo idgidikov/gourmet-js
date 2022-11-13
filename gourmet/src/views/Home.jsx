@@ -87,7 +87,7 @@ const Home = () => {
             <div className="forum-developers">
                 <div className="card w-96 bg-base-100 shadow-xl ml-8">
                     <figure className="px-10 pt-10">
-                        <img src="src/assets/ivan.jpg" alt="Shoes" className="rounded-xl" />
+                        <img src="src/assets/ivan.jpg"  alt="Shoes" className="rounded-xl w-62  h-96" />
                     </figure>
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Ivan</h2>
@@ -98,7 +98,7 @@ const Home = () => {
                 </div>
                 <div className="card w-96 bg-base-100 shadow-xl ml-4">
                     <figure className="px-10 pt-10">
-                        <img src="src/assets/evgeni.jpg" alt="Shoes" className="rounded-xl" />
+                        <img src="src/assets/evgeni.jpg"  alt="Shoes" className=" h-96 w-62 rounded-xl " />
                     </figure>
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Evgeni</h2>

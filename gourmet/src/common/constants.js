@@ -8,4 +8,4 @@ export const API_KEYS= {
 
 export const API = `http://localhost:5173`
 
-export const defaultPicture = 'src/assets/default_picture.jpg'
+export const defaultPicture = 'https://campussafetyconference.com/wp-content/uploads/2020/08/iStock-476085198.jpg'
