@@ -23,7 +23,7 @@ const MostLikes = () => {
            
             <div className="flex flex-wrap justify-around">
                 {posts.filter(   p => p.likedBy )
-                    .map(p => <PostsCard key={p.id} post={p} />)}
+                    .map(p => <PostsCard key={p.id} post={p} />).sort().reverse()}
             </div>
             
         </div>

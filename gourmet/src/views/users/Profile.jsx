@@ -48,8 +48,11 @@ function Profile() {
                     <tr>
                         
                         <th>My Posts</th>
-                        <th>
-                        <Link to="/create-blog-posts/"><p className="btn btn-primary" disabled={!userData?.isActive}>Create Post</p></Link>
+                        <th >
+                        {
+                            userData.isActive === true ? <Link to="/create-blog-posts/"><p className="btn btn-primary" disabled={!userData?.isActive}>Create Post</p> </Link>
+                            : <p className="btn btn-primary" disabled={!userData?.isActive}>Create Post</p>
+                        }
                         </th>
                     </tr>
                 </thead>

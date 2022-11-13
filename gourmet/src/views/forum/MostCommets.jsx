@@ -22,7 +22,7 @@ const MostCommets = () => {
            
             <div className="flex flex-wrap justify-around">
                 {posts.filter(   p => p.comments )
-                    .map(p => <PostsCard key={p.id} post={p} />)}
+                    .map(p => <PostsCard key={p.id} post={p} />).sort().reverse()}
             </div>
             
         </div>
