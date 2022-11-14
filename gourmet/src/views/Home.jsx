@@ -3,6 +3,7 @@ import { useEffect, useState} from 'react'
 import { userCount, postCount } from '../services/home.services'
 import NumbersShuffle from '../react-spring/NumbersShuffle'
 import { useNavigate } from 'react-router-dom'
+import AutoScrollText from '../react-spring/AutoScrollText'
 
 
 
@@ -34,7 +35,7 @@ const Home = () => {
     return (
         <div className="Home">
             <div className="header">
-                <h1 className="gourmet-header"><b>Gourmet</b></h1>
+                <h1 className="gourmet-header">Gourmet</h1>
                 <img className="main-image" src="src/assets/gourmet.jpg" alt="" />
             </div>
             <h2 className="header-statistics">Welcome to Gourmet forum</h2>
