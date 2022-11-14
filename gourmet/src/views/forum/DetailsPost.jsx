@@ -26,6 +26,7 @@ function DetailsPost() {
         title: '',
         url: '',
         id: '',
+        likedBy: {},
 
     })
 
@@ -39,6 +40,7 @@ function DetailsPost() {
                     url: p.url,
                     id: postId,
                     comments: [],
+                    likedBy: p.likedBy,
 
                 }))
                 const ids = Object.keys(p.comments || {})
