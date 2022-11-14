@@ -14,7 +14,10 @@ export const getUserById = async (uid) => {
   const value = snapshot.val()
   if(value!==null){
     const key = Object.keys(value)[0]
-    return value[key]
+    const userData =  value[key]
+    userData.likedPostsIds = Object.keys(userData.likedPosts || {})
+    return userData
+   
   }
   return value
 }

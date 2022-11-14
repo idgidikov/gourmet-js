@@ -41,7 +41,7 @@ function DetailsPost() {
                     comments: [],
 
                 }))
-                const ids = Object.keys(p.comments)
+                const ids = Object.keys(p.comments || {})
 
                 return Promise.all(ids.map(getCommentById))
                     .then(comments => setState(state => ({
@@ -110,7 +110,7 @@ function DetailsPost() {
     const toggleCommentForm = () => {
         setState({
             ...state,
-            showCommentForm: !state.showCommentForm,
+            showCommentForm: !state?.showCommentForm,
         })
     }
 
@@ -121,11 +121,11 @@ function DetailsPost() {
             return setState({ ...state, showCommentForm: false })
         }
 
-        addComment(userData.username, postId, state.commentText, userData.profile)
+        addComment(userData.username, postId, state?.commentText, userData?.profile)
             .then(comment => {
                 setState({
                     ...state,
-                    comments: [...state.comments, comment],
+                    comments: [...state?.comments, comment],
                     commentText: '',
                     showCommentForm: false,
                 })
@@ -145,7 +145,7 @@ function DetailsPost() {
             <h1 className="text-2xl text-center font-bold pt-8 mb-20" dangerouslySetInnerHTML={{ __html: state.title }}></h1>
             <div className="card lg:card-side bg-base-100 shadow-xl">
                 <div className="card-body">
-                    <p dangerouslySetInnerHTML={{ __html: state.post }}></p>
+                    <p dangerouslySetInnerHTML={{ __html: state?.post }}></p>
                     <div className="card-actions justify-end">
                         {/* <button className="btn btn-primary" onClick={like}>Like {likes}</button> */}
                         <button className="btn btn-primary" onClick={toggleLike}>{userData?.likedPostsIds?.includes(state?.id) ? ' Unlike' : 'Like'} : {Object.keys(state?.likedBy || {}).length} </button>
@@ -176,10 +176,10 @@ function DetailsPost() {
                         </button>
                     </div>
                 </div>}
-                {state.showCommentForm && <div className="form-control mt-6">
+                {state?.showCommentForm && <div className="form-control mt-6">
                     <div className="input-group">
                         <input
-                            value={state.commentText}
+                            value={state?.commentText}
                             onChange={e => setState({ ...state, commentText: e.target.value })}
                             type="textarea"
                             placeholder="Comment..."
