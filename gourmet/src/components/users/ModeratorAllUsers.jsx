@@ -3,6 +3,8 @@ import { AppContext } from '../../context/app.context'
 import { useContext } from 'react'
 import { deactivateUserById } from '../../services/admin.services'
 import { useState, useEffect } from 'react'
+import { defaultPicture } from '../../common/constants';
+
 
 function ModeratorAllUsers(post) {
     const { addToast } = useContext(AppContext)
@@ -11,7 +13,7 @@ function ModeratorAllUsers(post) {
     const [buttonActiveText, setButtonActiveText] = useState('')
     
     const blockUserById = async () => {
-        deactivateUserById(post?.user.uid)
+        deactivateUserById(post?.user.username)
             .then((result) => {
                 console.log(result.isActive)
                 if(result?.isActive == true) {
@@ -42,7 +44,7 @@ function ModeratorAllUsers(post) {
               <div className="flex items-center space-x-3">
                   <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
-                      <img src={post?.user.profile} alt="Avatar Tailwind CSS Component" />
+                      <img src={post?.user.profile ? post.user.profile : defaultPicture} alt="Avatar Tailwind CSS Component" />
                   </div>
                   </div>
                   

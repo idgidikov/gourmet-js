@@ -15,7 +15,7 @@
 
 .quill {
   color: #f0f0f0;
-  height: 550px;
+  min-height: 550px;
 }
 
 .quill span {
@@ -109,6 +109,6 @@
   font-size: 30px;
 }
 
-.rounded-xl {
+/* .rounded-xl {
   height: 450px;
-}
+} */
