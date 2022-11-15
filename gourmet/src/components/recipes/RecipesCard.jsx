@@ -1,7 +1,12 @@
 import React from "react"
 import {Link} from 'react-router-dom'
 import { useParams } from "react-router-dom"
+import AddToFavoritesComponent from '../../components/recipes/AddToFavoritesComponent'
+
+
 const RecipesCard = ({cocktail}) => {
+
+  
     
     return (
         
@@ -11,14 +16,12 @@ const RecipesCard = ({cocktail}) => {
         </figure>
         <div className="card-body items-center text-center">
           <h2 className="card-title">{cocktail.strDrink}</h2>
+          <AddToFavoritesComponent cocktailId={cocktail.idDrink}/>
           <p>{cocktail.strCategory}</p>
-          <div className="card-actions">
-            
+          <div className="card-actions justify-end">
             <Link className="btn btn-primary" to={`/cocktails/${cocktail.idDrink}`}>
             Details
             </Link>
-             
-            
           </div>
         </div>
       </div>

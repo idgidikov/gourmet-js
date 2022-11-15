@@ -1,14 +1,17 @@
 import React from "react"
 import { useEffect, useState} from 'react'
-import { userCount, postCount } from '../services/home.services'
+import { userCount, postCount, getImage } from '../services/home.services'
 import NumbersShuffle from '../react-spring/NumbersShuffle'
 import { useNavigate } from 'react-router-dom'
-
 
 
 const Home = () => {
     const [users, setUsers] = useState(0)
     const [posts, setPosts] = useState(0)
+    const [mainImage, setMainImage] = useState();
+    const [ivanImage, setIvanImage] = useState();
+    const [evgeniImage, setEvgeniImage] = useState();
+
 
     const navigate = useNavigate()
 
@@ -28,20 +31,23 @@ const Home = () => {
     useEffect(() => {
         userCount().then(res => setUsers(res))
         postCount().then(res => setPosts(res))
+        getImage('static/gourmet.jpg').then(res => setMainImage(res))
+        getImage('static/ivan.jpg').then(res => setIvanImage(res))
+        getImage('static/evgeni.jpg').then(res => setEvgeniImage(res))
+        
     }, [])
-
 
     return (
         <div className="Home">
             <div className="header">
                 <h1 className="gourmet-header">Gourmet</h1>
-                <img className="main-image" src="src/assets/gourmet.jpg" alt="" />
+                <img className="main-image" src={mainImage} alt="" />
             </div>
             <h2 className="header-statistics">Welcome to Gourmet forum</h2>
             <div className="forum-statistics">
                 <div className="card w-96 bg-neutral text-neutral-content ml-3">
                     <div className="card-body items-center text-center">
-                        <h2 className="card-title-statistics"><NumbersShuffle n={100} /></h2>
+                        <h2 className="card-title-statistics"><NumbersShuffle n={243} /></h2>
                         <p className="card-paragraph-statistics">Cocktails</p>
                         <div className="card-actions justify-end">
                             <button className="btn btn-primary" onClick={showAllCocktails}>View</button>
@@ -50,7 +56,7 @@ const Home = () => {
                 </div>
                 <div className="card w-96 bg-neutral text-neutral-content ml-3">
                     <div className="card-body items-center text-center">
-                        <h2 className="card-title-statistics"><NumbersShuffle n={100} /></h2>
+                        <h2 className="card-title-statistics"><NumbersShuffle n={187} /></h2>
                         <p className="card-paragraph-statistics">Meals</p>
                         <div className="card-actions justify-end">
                             <button className="btn btn-primary" onClick={showAllMeals}>View</button>
@@ -87,7 +93,7 @@ const Home = () => {
             <div className="forum-developers">
                 <div className="card w-96 bg-base-100 shadow-xl ml-8">
                     <figure className="px-10 pt-10">
-                        <img src="src/assets/ivan.jpg"  alt="Shoes" className="rounded-xl w-62  h-96" />
+                        <img src={ivanImage}  alt="Shoes" className="rounded-xl w-62  h-96" />
                     </figure>
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Ivan</h2>
@@ -98,7 +104,7 @@ const Home = () => {
                 </div>
                 <div className="card w-96 bg-base-100 shadow-xl ml-4">
                     <figure className="px-10 pt-10">
-                        <img src="src/assets/evgeni.jpg"  alt="Shoes" className=" h-96 w-62 rounded-xl " />
+                        <img src={evgeniImage}  alt="Shoes" className=" h-96 w-62 rounded-xl " />
                     </figure>
                     <div className="card-body items-center text-center">
                         <h2 className="card-title">Evgeni</h2>

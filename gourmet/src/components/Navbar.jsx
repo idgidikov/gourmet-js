@@ -1,11 +1,8 @@
 import React from "react"
-import AllCocktails from "../views/recipes/AllCocktails"
 import { Link, NavLink } from "react-router-dom"
-import Home from "../views/Home"
 import { useContext } from 'react'
 import { AppContext } from '../context/app.context'
 import { useSearchParams } from 'react-router-dom'
-import { getPostsByName } from "../services/post.services"
 import { useEffect, useState } from 'react'
 import { defaultPicture } from "../common/constants"
 
@@ -18,17 +15,6 @@ const Navbar = function () {
 
     const [posts, setPosts] = useState([])
     const [keyword, setKeyword] = useState(search.get('name') || '')
-
-
-    // useEffect(() => {
-    //     if (keyword === '') return setPosts([])
-    
-    //     const timer = setTimeout(() => getPostsByName(keyword)
-    //       .then(setPosts)
-    //       .catch(e => addToast('error', e.message)), 1000)
-    
-    //     return () => clearTimeout(timer)
-    //   }, [keyword])
     
       const setSearchParams = (value) => {
         setKeyword(value)
@@ -40,10 +26,6 @@ const Navbar = function () {
         })
         
       }
-      
-
-
-
 
     return (
         <div className="navbar bg-base-100">
@@ -53,10 +35,9 @@ const Navbar = function () {
 
             <div className="flex-none">
                 <ul className="menu menu-horizontal p-0">
-                    <li><NavLink to="/cocktails">Cocktails</NavLink></li>
-                    <li><NavLink to="/meals" >Meal</NavLink></li>
-                    <li><NavLink to="/blog-posts/">Blog</NavLink></li>
-                    {/* <li><NavLink to="/login">Login</NavLink></li> */}
+                    <li className="menu-item mr-5"><NavLink to="/cocktails">Cocktails</NavLink></li>
+                    <li className="menu-item mr-5"><NavLink to="/meals" >Meal</NavLink></li>
+                    <li className="menu-item mr-5"><NavLink to="/blog-posts/">Blog</NavLink></li>
                 </ul>
             </div>
 

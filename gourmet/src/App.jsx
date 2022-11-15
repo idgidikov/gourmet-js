@@ -18,7 +18,6 @@ import Login from './views/users/Login'
 import Signup from './views/users/Signup'
 import DetailsPost from './views/forum/DetailsPost'
 import Logout from './views/users/Logout'
-import Profile from './views/users/Profile'
 import ProfileEdit from './views/users/ProfileEdit'
 import Authenticated from './hoc/Authenticated'
 import EditPost from './views/forum/EditPost'
@@ -30,6 +29,8 @@ import UserRoleRender from './hoc/UserRole'
 import ByDatePosts from './views/forum/ByDatePosts'
 import MostLikes from './views/forum/MostLikes'
 import MostCommets from './views/forum/MostCommets'
+import FavoritesCocktails from './views/users/FavoritesCocktails'
+import FavoritesMeals from './views/users/FavoritesMeals'
 
 
 
@@ -99,6 +100,8 @@ function App() {
           <Route path='/blog-posts/most-liked' element={<MostLikes />} />
           <Route path='/blog-posts/most-commented' element={<MostCommets />} />
 
+          <Route path="/my-favorites-cocktails" element={<Authenticated user={appState.user}><FavoritesCocktails /></Authenticated>}/>
+          <Route path="/my-favorites-meals" element={<Authenticated user={appState.user}><FavoritesMeals /></Authenticated>}/>
           <Route path="/create-blog-posts/" element={<Authenticated user={appState.user}><CreatePost /></Authenticated>}/>
           
           <Route path="/blog-post/:postId" element={<Authenticated user={appState.user}><DetailsPost /></Authenticated>} />
