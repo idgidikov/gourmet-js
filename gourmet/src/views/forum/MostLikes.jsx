@@ -13,6 +13,11 @@ const MostLikes = () => {
 
     useEffect(() => {
         getAllPosts().then((res) => {
+            if (res.length > 0) {
+                res.sort((a, b) => {
+                    return Object.keys(b.likedBy || {}).length - Object.keys(a.likedBy || {}).length
+                });
+            }
             setPosts(res)
         }).catch(e => addToast('error', e.message))
     }, [])
@@ -23,7 +28,7 @@ const MostLikes = () => {
            
             <div className="flex flex-wrap justify-around">
                 {posts.filter(   p => p.likedBy )
-                    .map(p => <PostsCard key={p.id} post={p} />).sort().reverse()}
+                    .map(p => <PostsCard key={p.id} post={p} />)}
             </div>
             
         </div>

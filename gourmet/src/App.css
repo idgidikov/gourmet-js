@@ -109,7 +109,9 @@
   font-size: 30px;
 }
 
-/* .rounded-xl {
-  height: 450px;
-} */
+.pagination-block {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
 

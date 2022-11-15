@@ -12,6 +12,11 @@ const MostCommets = () => {
 
     useEffect(() => {
         getAllPosts().then((res) => {
+            if (res.length > 0) {
+                res.sort((a, b) => {
+                    return Object.keys(b.comments || {}).length - Object.keys(a.comments || {}).length
+                });
+            }
             setPosts(res)
         }).catch(e => addToast('error', e.message))
     }, [])
@@ -22,7 +27,7 @@ const MostCommets = () => {
            
             <div className="flex flex-wrap justify-around">
                 {posts.filter(   p => p.comments )
-                    .map(p => <PostsCard key={p.id} post={p} />).sort().reverse()}
+                    .map(p => <PostsCard key={p.id} post={p} />)}
             </div>
             
         </div>
