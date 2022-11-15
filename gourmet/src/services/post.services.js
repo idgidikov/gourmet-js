@@ -3,13 +3,14 @@ import { db, storage } from '../firebase/config'
 
 
 
-export const createPost = async({title, post, url, username}) => {
+export const createPost = async({title, post, url, username,tag}) => {
     const body = {
       title,
       post,
       url,
       author: username,
       addedOn: Date.now(),
+      tag
     }
 
     const { key } = await push(ref(db, `posts`), body)

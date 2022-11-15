@@ -108,3 +108,10 @@
   color: #f0f0f0;
   font-size: 30px;
 }
+
+.pagination-block {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
