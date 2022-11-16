@@ -39,6 +39,8 @@ function Profile() {
                 
                 {/* <p>{email}</p> */}
                 <div className="card-actions justify-end">
+                    <Link to='/my-favorites-cocktails' className="btn btn-primary">Favorites Cocktails</Link>
+                    <Link to='/my-favorites-meals' className="btn btn-primary">Favorites Meals</Link>
                     <Link to='/edit-profile' className="btn btn-primary">Edit Info</Link>
                 </div>
             </div>

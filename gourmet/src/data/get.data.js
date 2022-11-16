@@ -9,3 +9,9 @@ export const getSingleCocktail = async function (API,id) {
     return data.json();
 
 }
+
+export const getFavoriteCocktails = async (list=[]) => {
+    const listFavorites = list.map(id => getSingleCocktail(API, id))
+
+    return listFavorites
+}

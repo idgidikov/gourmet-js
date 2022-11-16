@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { deletePost } from '../../services/post.services'
 import { useContext } from 'react'
 import { AppContext } from '../../context/app.context'
+import { defaultPicture } from '../../common/constants';
 
 function UserPostRows(post) {
     const timestamp = post?.post.addedOn
@@ -33,7 +34,7 @@ function UserPostRows(post) {
               <div className="flex items-center space-x-3">
                   <div className="avatar">
                   <div className="mask mask-squircle w-12 h-12">
-                      <img src={post?.post.url} alt="Avatar Tailwind CSS Component" />
+                      <img src={post?.post.url ? post.post.url : defaultPicture} alt="Avatar Tailwind CSS Component" />
                   </div>
                   </div>
                   

@@ -18,7 +18,6 @@ import Login from './views/users/Login'
 import Signup from './views/users/Signup'
 import DetailsPost from './views/forum/DetailsPost'
 import Logout from './views/users/Logout'
-import Profile from './views/users/Profile'
 import ProfileEdit from './views/users/ProfileEdit'
 import Authenticated from './hoc/Authenticated'
 import EditPost from './views/forum/EditPost'
@@ -32,6 +31,9 @@ import MostLikes from './views/forum/MostLikes'
 import MostComments from './views/forum/MostComments'
 import Food from './views/forum/Food'
 import Beverage from './views/forum/Beverage'
+import FavoritesCocktails from './views/users/FavoritesCocktails'
+import FavoritesMeals from './views/users/FavoritesMeals'
+
 
 
 function App() {
@@ -102,6 +104,8 @@ function App() {
           <Route path='/blog-posts/food' element={<Food />} />
           <Route path='/blog-posts/beverage' element={<Beverage />} />
 
+          <Route path="/my-favorites-cocktails" element={<Authenticated user={appState.user}><FavoritesCocktails /></Authenticated>}/>
+          <Route path="/my-favorites-meals" element={<Authenticated user={appState.user}><FavoritesMeals /></Authenticated>}/>
           <Route path="/create-blog-posts/" element={<Authenticated user={appState.user}><CreatePost /></Authenticated>}/>
           
           <Route path="/blog-post/:postId" element={<Authenticated user={appState.user}><DetailsPost /></Authenticated>} />

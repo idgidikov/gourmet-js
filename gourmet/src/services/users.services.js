@@ -9,6 +9,7 @@ export const getUser = async (username) => {
 
   return snapshot.val()
 }
+
 export const getUserById = async (uid) => {
   const snapshot = await get(query(ref(db, 'users'), orderByChild('uid'),equalTo(uid)))
   const value = snapshot.val()
@@ -24,12 +25,12 @@ export const getUserById = async (uid) => {
 
 
 
-export const createUser = async (uid, username,email,firstName,lastName, role = userRole.BASIC,isActive=true) => {
+export const createUser = async (uid, username,email,firstName,lastName, role = userRole.BASIC, isActive=true, favorites) => {
   const user = await getUser(username)
 
   if (user !== null) throw new Error(`User with username ${username} already exists!`)
 
-  const userData = { uid, username, role,email,firstName,lastName, registeredOn: Date.now(),isActive }
+  const userData = { uid, username, role, email, firstName,lastName, registeredOn: Date.now(), isActive, favorites }
 
   await set(ref(db, `users/${username}`), userData)
 
