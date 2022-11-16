@@ -1,3 +1,4 @@
+import React from "react"
 import MenuBlog from "../../components/forum/MenuBlog"
 import { getAllPosts } from '../../services/post.services'
 import { useState } from 'react'
@@ -6,28 +7,25 @@ import { useContext } from 'react'
 import { AppContext } from '../../context/app.context'
 import PostsCard from '../../components/forum/PostCard'
 
-const MostCommets = () => {
+const Beverage = () => {
     const [posts, setPosts] = useState([])
     const { addToast } = useContext(AppContext)
 
     useEffect(() => {
         getAllPosts().then((res) => {
-            if (res.length > 0) {
-                res.sort((a, b) => {
-                    return Object.keys(b.comments || {}).length - Object.keys(a.comments || {}).length
-                });
-            }
-            setPosts(res)
+            if(res.length > 0){
+              const filteredRes= res.filter(p => p.tag === 'Food')
+            setPosts(filteredRes)
+        }
         }).catch(e => addToast('error', e.message))
     }, [])
     return (
         <div className="AllPost">
             <MenuBlog />
-            <h1>Most Commented Post</h1>
+            <h1>Food</h1>
            
             <div className="flex flex-wrap justify-around">
-                {posts.filter(   p => p.comments )
-                    .map(p => <PostsCard key={p.id} post={p} />)}
+                {posts.map(p => <PostsCard key={p.id} post={p} />).reverse()}
             </div>
             
         </div>
@@ -35,4 +33,4 @@ const MostCommets = () => {
 
 }
 
-export default MostCommets
+export default Beverage

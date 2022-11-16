@@ -8,13 +8,13 @@ import { useSearchParams } from 'react-router-dom'
 import { getPostsByName } from "../services/post.services"
 import { useEffect, useState } from 'react'
 import { defaultPicture } from "../common/constants"
-
+import { useLocation } from "react-router-dom"
 
 
 const Navbar = function () {
     const [search, setSearch] = useSearchParams()
     const { addToast, setAppState, user, userData, searchData } = useContext(AppContext)
-
+    const location = useLocation()
 
     const [posts, setPosts] = useState([])
     const [keyword, setKeyword] = useState(search.get('name') || '')
@@ -40,9 +40,8 @@ const Navbar = function () {
         })
         
       }
-      
-
-
+     
+     
 
 
     return (

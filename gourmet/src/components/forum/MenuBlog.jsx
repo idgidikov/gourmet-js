@@ -18,6 +18,8 @@ const MenuBlog = () => {
                         <Link to='/blog-posts/last-added' className="btn">lastAdded</Link>
                         <Link to='/blog-posts/most-commented' className="btn">Most Commented</Link>
                         <Link to='/blog-posts/most-liked' className="btn">Most Liked</Link>
+                        <Link to='/blog-posts/food' className="btn">Food</Link>
+                        <Link to='/blog-posts/beverage' className="btn">Beverage</Link>
                       
 
 
@@ -29,6 +31,8 @@ const MenuBlog = () => {
                     <Link to='/blog-posts/last-added' className="btn">Last Added</Link>
                     <Link to='/blog-posts/most-commented' className="btn">Most Commented</Link>
                     <Link to='/blog-posts/most-liked' className="btn">Most Liked</Link>
+                    <Link to='/blog-posts/food' className="btn">Food</Link>
+                    <Link to='/blog-posts/beverage' className="btn">Beverage</Link>
                 </ul>
             </div>
             <div className="navbar-end">

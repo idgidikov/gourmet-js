@@ -23,7 +23,7 @@ const CreatePost = () => {
   const [thumbnail, setThumbnail] = useState('');
   const [titleValidator, setTitleValidator] = useState(false);
   const [postValidator, setPostValidator] = useState(false);
-  const [tag, setTag] = useState('');
+  const [tag, setTag] = useState('Beverage');
 
 
   const { user, addToast, userData } = useContext(AppContext)
@@ -95,8 +95,8 @@ const CreatePost = () => {
       <div className='select-tag'>
         <select className="select select-bordered w-full max-w-xs" value={tag} onChange={e => setTag(e.target.value)}>
           
-          <option>Cocktails</option>
-          <option>Meals</option>
+          <option>Beverage</option>
+          <option>Food</option>
         </select>
       </div>
       <ReactQuill

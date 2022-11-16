@@ -29,8 +29,9 @@ import Moderator from './views/users/Moderator'
 import UserRoleRender from './hoc/UserRole'
 import ByDatePosts from './views/forum/ByDatePosts'
 import MostLikes from './views/forum/MostLikes'
-import MostCommets from './views/forum/MostCommets'
-
+import MostComments from './views/forum/MostComments'
+import Food from './views/forum/Food'
+import Beverage from './views/forum/Beverage'
 
 
 function App() {
@@ -97,7 +98,9 @@ function App() {
           <Route path="/blog-posts/" element={<AllPosts />} />
           <Route path='/blog-posts/last-added' element={<ByDatePosts />} />
           <Route path='/blog-posts/most-liked' element={<MostLikes />} />
-          <Route path='/blog-posts/most-commented' element={<MostCommets />} />
+          <Route path='/blog-posts/most-commented' element={<MostComments />} />
+          <Route path='/blog-posts/food' element={<Food />} />
+          <Route path='/blog-posts/beverage' element={<Beverage />} />
 
           <Route path="/create-blog-posts/" element={<Authenticated user={appState.user}><CreatePost /></Authenticated>}/>
           
