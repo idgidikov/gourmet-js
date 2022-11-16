@@ -71,7 +71,7 @@ const CreatePost = () => {
         const url = await getDownloadURL(result.ref)
         setThumbnail(url)
         
-        await createPost({ title, post, url, username,tag })
+        await createPost({ title, post, url, username, tag })
         showAllPosts()
       } catch (error) {
         addToast('error', error.message)
@@ -92,7 +92,7 @@ const CreatePost = () => {
         accept="image/*"
         onChange={handleFileUpload}
         className="file-input file-input-bordered file-input-info w-full max-w-full mb-6" />
-      <div className='select-tag'>
+      <div className='select-tag mb-5'>
         <select className="select select-bordered w-full max-w-xs" value={tag} onChange={e => setTag(e.target.value)}>
           
           <option>Beverage</option>

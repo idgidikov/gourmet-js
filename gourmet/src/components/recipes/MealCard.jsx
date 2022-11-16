@@ -8,7 +8,7 @@ const MealCard = ({meal}) => {
     
     return (
         
-        <div className="card w-96 bg-base-200 shadow-xl mb-5">
+        <div className="card w-96 bg-base-300 shadow-xl mb-7">
         <figure className="px-10 pt-10">
           <img src={meal.strMealThumb} alt={meal.strMeal} className="rounded-xl" />
         </figure>

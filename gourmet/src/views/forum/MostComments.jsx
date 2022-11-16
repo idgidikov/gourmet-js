@@ -23,7 +23,7 @@ const MostComments = () => {
     return (
         <div className="AllPost">
             <MenuBlog />
-            <h1>Most Commented Post</h1>
+            <h1 className="about-us-header">Most Commented Post</h1>
            
             <div className="flex flex-wrap justify-around">
                 {posts.filter(   p => p.comments )

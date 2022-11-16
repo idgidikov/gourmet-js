@@ -10,7 +10,7 @@ const RecipesCard = ({cocktail}) => {
     
     return (
         
-        <div className="card w-96 bg-base-100 shadow-xl">
+        <div className="card w-96 bg-base-300 shadow-xl mb-7">
         <figure className="px-10 pt-10">
           <img src={cocktail.strDrinkThumb} alt={cocktail.strDrink} className="rounded-xl" />
         </figure>

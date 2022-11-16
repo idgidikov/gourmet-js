@@ -19,7 +19,7 @@ const ByDatePosts = () => {
     return (
         <div className="AllPost">
             <MenuBlog />
-            <h1>Last Added by Date</h1>
+            <h1 className="about-us-header">Last Added by Date</h1>
            
             <div className="flex flex-wrap justify-around">
                 {posts.map(p => <PostsCard key={p.id} post={p} />).reverse()}

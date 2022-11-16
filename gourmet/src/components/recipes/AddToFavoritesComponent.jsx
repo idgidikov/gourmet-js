@@ -26,26 +26,7 @@ function AddToFavoritesComponent(cocktailId) {
     }
     console.log(userData)
 
-    // useEffect(() => {
-    //     if (user !== null) {
-
-    //         getUser(userData?.username)
-    //             .then((u) => {
-    //                 setAppState({
-    //                     ...user,
-    //                     userData: {
-    //                         ...userData,
-    //                         favorites: {
-    //                             ...favorites,
-    //                             cocktails: u?.favorites?.cocktails || {},
-    //                         },
-    //                     },
-    //                 })
-    //             })
-    //             .catch((error) => {addToast('error', error.message), console.log(error)})
-    //     }
-
-    // }, [cocktailId])
+ 
 
     return (
         <div className="add-to-favorites" onClick={addToFavorites}>

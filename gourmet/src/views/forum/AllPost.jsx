@@ -26,13 +26,13 @@ const AllPosts = () => {
     return (
         <div className="AllPost">
             <MenuBlog />
-            <h1>All Posts</h1>
+            <h1 className="about-us-header">All Posts</h1>
 
             <div className="flex flex-wrap justify-around">
                 {posts.map(p => <PostsCard key={p.id} post={p} />)}
             </div>
             <div className="pagination-block">
-                <button className="btn btn-primary" disabled={page === 0} onClick={() => setPage(page - 1)}>Prev</button>
+                <button className="btn btn-primary mr-5" disabled={page === 0} onClick={() => setPage(page - 1)}>Prev</button>
                 <button className="btn btn-primary" disabled={posts.length == 0} onClick={() => setPage(page + 1)} >Next</button>
             </div>
 

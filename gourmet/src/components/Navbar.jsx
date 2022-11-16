@@ -52,10 +52,9 @@ const Navbar = function () {
 
             <div className="flex-none">
                 <ul className="menu menu-horizontal p-0">
-                    <li><NavLink to="/cocktails">Cocktails</NavLink></li>
-                    <li><NavLink to="/meals" >Meal</NavLink></li>
-                    <li><NavLink to="/blog-posts/">Blog</NavLink></li>
-                    {/* <li><NavLink to="/login">Login</NavLink></li> */}
+                    <li className="mr-5"><NavLink to="/cocktails">Cocktails</NavLink></li>
+                    <li className="mr-5"><NavLink to="/meals" >Meal</NavLink></li>
+                    <li className="mr-5"><NavLink to="/blog-posts/">Blog</NavLink></li>
                 </ul>
             </div>
 
@@ -63,7 +62,7 @@ const Navbar = function () {
                 <div className="form-control">
                     <Link to='/search-posts'><input  
                     type="text" placeholder="Search" 
-                    className="input input-bordered"
+                    className="input input-bordered mr-5"
                     value={keyword}
                     onChange={e => setSearchParams(e.target.value)}
                      /></Link>

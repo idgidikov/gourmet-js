@@ -24,7 +24,7 @@ const MostLikes = () => {
     return (
         <div className="AllPost">
             <MenuBlog />
-            <h1>Most Liked Posts</h1>
+            <h1 className="about-us-header">Most Liked Posts</h1>
            
             <div className="flex flex-wrap justify-around">
                 {posts.filter(   p => p.likedBy )

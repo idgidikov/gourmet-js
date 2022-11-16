@@ -17,9 +17,10 @@ function FavoritesCocktails() {
                 
             })
     }, [userData])
+
     return (
         <div className="AllCocktails">
-            <h1> My Favorites Cocktails</h1>
+            <h1 className="about-us-header"> My Favorites Cocktails</h1>
             <div className="flex flex-wrap justify-around">
                 {favorites?.map(el => <RecipesCard key={el.drinks[0].idDrink} cocktail={el?.drinks[0]} cockDetails={() => (el.drinks[0].idDrink)} />)}
             </div>

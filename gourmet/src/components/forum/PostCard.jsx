@@ -11,7 +11,7 @@ function PostCard({post}) {
 
     return (
 
-      <div className="card card-side bg-base-100 shadow-xl mb-8">
+      <div className="card card-side bg-base-300 shadow-xl mb-8 mr-5">
       <figure><img className="w-24 rounded-xl" src={post.url} alt="Post"/></figure>
       <div className="card-body">
         <h2 className="card-title">{post.title}</h2>

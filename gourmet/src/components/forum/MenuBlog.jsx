@@ -28,11 +28,11 @@ const MenuBlog = () => {
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
-                    <Link to='/blog-posts/last-added' className="btn">Last Added</Link>
-                    <Link to='/blog-posts/most-commented' className="btn">Most Commented</Link>
-                    <Link to='/blog-posts/most-liked' className="btn">Most Liked</Link>
-                    <Link to='/blog-posts/food' className="btn">Food</Link>
-                    <Link to='/blog-posts/beverage' className="btn">Beverage</Link>
+                    <li className="mr-5"><Link to='/blog-posts/last-added' className="btn">Last Added</Link></li>
+                    <li className="mr-5"><Link to='/blog-posts/most-commented' className="btn">Most Commented</Link></li>
+                    <li className="mr-5"><Link to='/blog-posts/most-liked' className="btn">Most Liked</Link></li>
+                    <li className="mr-5"><Link to='/blog-posts/food' className="btn">Food</Link></li>
+                    <li className="mr-5"><Link to='/blog-posts/beverage' className="btn">Beverage</Link></li>
                 </ul>
             </div>
             <div className="navbar-end">

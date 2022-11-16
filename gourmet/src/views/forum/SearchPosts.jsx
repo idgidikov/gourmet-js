@@ -29,7 +29,7 @@ function SearchPosts() {
     return (
         <>
 
-            <h1>SearchPosts</h1>
+            <h1 className="about-us-header">SearchPosts</h1>
             <div className="flex flex-wrap justify-around">
         {posts?.map(m => <PostsCard key={m.id} post={m} />)}
         

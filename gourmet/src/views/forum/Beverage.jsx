@@ -22,7 +22,7 @@ const Beverage = () => {
     return (
         <div className="AllPost">
             <MenuBlog />
-            <h1>Beverage</h1>
+            <h1 className="about-us-header">Beverage</h1>
            
             <div className="flex flex-wrap justify-around">
                 {posts.map(p => <PostsCard key={p.id} post={p} />).reverse()}
