@@ -29,7 +29,7 @@ function Profile() {
 
     return (<>
         <div className="card card-side bg-base-100 shadow-xl">
-            <figure><img className='w-72' src={userData?.profile ? userData.profile : defaultPicture} alt="Movie" /></figure>
+            <figure><img className='w-72' src={userData?.profile ? userData.profile : defaultPicture} alt="" /></figure>
             <div className="card-body">
                 <h2 className="card-title"> Hello {userData?.username}
                 </h2>
